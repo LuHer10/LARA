@@ -9,6 +9,8 @@
 #define DEVICE_ADDRESS 0x80
 #define SERIAL_PORT "/dev/ttyAMA0"
 
+#define BAUD_RATE B50
+
 // CRC computation for packet serial
 uint16_t crc16(const uint8_t* data, size_t length) {
     uint16_t crc = 0;
@@ -50,8 +52,8 @@ int openSerialPort(const char* device) {
 
     struct termios options{};
     tcgetattr(fd, &options);
-    cfsetispeed(&options, B50);
-    cfsetospeed(&options, B50);
+    cfsetispeed(&options, BAUD_RATE);
+    cfsetospeed(&options, BAUD_RATE);
     options.c_cflag |= (CLOCAL | CREAD);
     options.c_cflag &= ~CSIZE;
     options.c_cflag |= CS8;
