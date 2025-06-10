@@ -9,7 +9,7 @@
 #define DEVICE_ADDRESS 0x80
 #define SERIAL_PORT "/dev/ttyAMA0"
 
-#define BAUD_RATE B50
+#define BAUD_RATE B115200
 
 // CRC computation for packet serial
 uint16_t crc16(const uint8_t* data, size_t length) {
