@@ -12,6 +12,15 @@
 #define DEFAULT_PORT "/dev/ttyAMA0"
 #define DEFAULT_BAUDS B1152000
 
+enum commands:uint8_t{
+    M1_DUTY = 32,
+    M2_DUTY = 33,
+    M1_M2_DUTY = 34,
+    M1_SPEED = 35,  
+    M2_SPEED = 36,
+    M1_M2_SPEED = 37
+};
+
 class RoboClaw
 {
 private:
@@ -63,6 +72,12 @@ public:
 
     void M1Duty(uint8_t address, uint16_t duty);
     void M2Duty(uint8_t address, uint16_t duty);
+    void M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2);
+
+    void M1Speed(uint8_t address, uint32_t speed);
+    void M2Speed(uint8_t address, uint32_t speed);
+    void M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2);
+
 };
 
 #endif //ROBOCLAW_H
