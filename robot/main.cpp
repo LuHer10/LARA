@@ -17,6 +17,7 @@ int main() {
 
     // Stop motors (speed = 0)
     rcl.M1Duty(FRONT_ADDRESS, 0);
+    rcl.M2Duty(FRONT_ADDRESS, 0);
 
     
     std::cout << "Motors ran for 2 seconds at half speed, now stopped." << std::endl;
