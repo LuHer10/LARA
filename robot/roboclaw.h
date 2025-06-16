@@ -18,7 +18,8 @@ enum commands:uint8_t{
     M1_M2_DUTY = 34,
     M1_SPEED = 35,  
     M2_SPEED = 36,
-    M1_M2_SPEED = 37
+    M1_M2_SPEED = 37,
+    M1_M2_ENCODERS = 78
 };
 
 class RoboClaw
@@ -29,8 +30,8 @@ private:
 
     int fd;
 
-    uint16_t crc16(const uint8_t* data, size_t length) {
-        uint16_t crc = 0;
+    uint16_t crc16(const uint8_t* data, size_t length, uint16_t init = 0) {
+        uint16_t crc = init;
         for(size_t i = 0; i < length; ++i) {
             crc ^= ((uint16_t)data[i]) << 8;
             for(int j = 0; j < 8; ++j) {
@@ -77,6 +78,13 @@ public:
     void M1Speed(uint8_t address, uint32_t speed);
     void M2Speed(uint8_t address, uint32_t speed);
     void M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2);
+    
+    void allSpeed(uint32_t speed1, uint32_t speed2, uint32_t speed3, uint32_t speed4);
+    void allDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4);
+
+    bool readCommand(uint8_t address, uint8_t command, uint8_t* rxData, size_t n);
+
+    bool readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encoder2);
 
 };
 
