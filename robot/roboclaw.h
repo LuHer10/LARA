@@ -10,7 +10,7 @@
 #define FRONT_ADDRESS 0x80
 #define BACK_ADDRESS  0x81
 #define DEFAULT_PORT "/dev/ttyAMA0"
-#define DEFAULT_BAUDS B1152000
+#define DEFAULT_BAUDS B115200
 
 enum commands:uint8_t{
     M1_DUTY = 32,
@@ -46,16 +46,18 @@ private:
 
 
 public:
-    RoboClaw(const char* _serialPort =  DEFAULT_PORT, int _baudRate = DEFAULT_BAUDS):serialPort(_serialPort),baudRate(_baudRate)
+    RoboClaw(const char* _serialPort =  DEFAULT_PORT, int _baudRate = DEFAULT_BAUDS)
     {
-        int fd = open(serialPort, O_RDWR | O_NOCTTY);
+        serialPort = _serialPort;
+        baudRate = _baudRate;
+        fd = open(serialPort, O_RDWR | O_NOCTTY);
         if (fd == -1)
             perror("openSerialPort: Unable to open port");
 
         struct termios options{};
         tcgetattr(fd, &options);
-        cfsetispeed(&options, baudRate);
-        cfsetospeed(&options, baudRate);
+        cfsetispeed(&options, _baudRate);
+        cfsetospeed(&options, _baudRate);
         options.c_cflag |= (CLOCAL | CREAD);
         options.c_cflag &= ~CSIZE;
         options.c_cflag |= CS8;

@@ -49,6 +49,10 @@ int openSerialPort(const char* device) {
         perror("openSerialPort: Unable to open port");
         return -1;
     }
+    
+    printf("File descriptor open, bauds: %d, port: %s\n", BAUD_RATE, device);
+    printf("fd: %d\n");
+
 
     struct termios options{};
     tcgetattr(fd, &options);
