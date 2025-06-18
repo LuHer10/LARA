@@ -12,7 +12,10 @@
 #define DEFAULT_PORT "/dev/ttyAMA0"
 #define DEFAULT_BAUDS B38400
 
+
 enum commands:uint8_t{
+    READ_M1_SPEED = 18,
+    READ_M2_SPEED = 19,
     RESET_ENCODERS = 20,
     M1_DUTY = 32,
     M2_DUTY = 33,
@@ -89,6 +92,8 @@ public:
 
     bool readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encoder2);
     bool resetEncoders(uint8_t address);
+
+    bool readSpeeds(uint8_t address, uint32_t& speed1, uint32_t& speed2);
 
 };
 

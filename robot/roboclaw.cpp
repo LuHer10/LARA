@@ -211,3 +211,20 @@ bool RoboClaw::resetEncoders(uint8_t address)
     if(recv == 0xFF) return true;
     return false;
 }
+
+bool RoboClaw::readSpeeds(uint8_t address, uint32_t& speed1, uint32_t& speed2)
+{
+    bool recv;
+    uint8_t response[7];
+    if(recv  = readCommand(address, READ_M1_SPEED, response, 7))
+        speed1 = ((uint32_t)response[0] << 24) |
+                 ((uint32_t)response[1] << 16) |
+                 ((uint32_t)response[2] << 8)  |
+                 (uint32_t)response[3] * (uint32_t)(response[4]? -1 : 1);
+    if(recv &= readCommand(address, READ_M2_SPEED, response, 7))
+        speed2 = ((uint32_t)response[0] << 24) |
+                 ((uint32_t)response[1] << 16) |
+                 ((uint32_t)response[2] << 8)  |
+                 (uint32_t)response[3] * (uint32_t)(response[4]? -1 : 1);
+    return recv;
+}
