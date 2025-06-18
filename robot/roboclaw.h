@@ -13,6 +13,7 @@
 #define DEFAULT_BAUDS B38400
 
 enum commands:uint8_t{
+    RESET_ENCODERS = 20,
     M1_DUTY = 32,
     M2_DUTY = 33,
     M1_M2_DUTY = 34,
@@ -87,6 +88,7 @@ public:
     bool readCommand(uint8_t address, uint8_t command, uint8_t* rxData, size_t n);
 
     bool readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encoder2);
+    bool resetEncoders(uint8_t address);
 
 };
 

@@ -14,6 +14,9 @@ int main() {
     uint32_t encFL, encFR;
     uint32_t encBL, encBR;
 
+    rcl.resetEncoders(FRONT_ADDRESS);
+    rcl.resetEncoders(BACK_ADDRESS);
+    
     rcl.readEncoders(FRONT_ADDRESS, encFL, encFR);
     rcl.readEncoders(BACK_ADDRESS, encBL, encBR);
     std::cout << "Encoder start values:\nencFL: " << encFL

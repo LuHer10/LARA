@@ -193,3 +193,21 @@ bool RoboClaw::readCommand(uint8_t address, uint8_t command, uint8_t* rxData, si
     
     return crc == receivedCrc;
 }
+
+bool RoboClaw::resetEncoders(uint8_t address)
+{
+    uint8_t packet[4];
+    packet[0] = address;
+    packet[1] = RESET_ENCODERS; // Command for resetting encoders
+
+    uint16_t crc = crc16(packet, 2);
+    packet[2] = (crc >> 8) & 0xFF;
+    packet[3] = crc & 0xFF;
+
+    write(fd, packet, 4);
+    tcdrain(fd);
+    uint8_t recv;
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
+}
