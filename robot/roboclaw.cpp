@@ -1,6 +1,6 @@
 #include "roboclaw.h"
 
-void RoboClaw::M1Duty(uint8_t address, uint16_t duty)
+bool RoboClaw::M1Duty(uint8_t address, uint16_t duty)
 {
     uint8_t packet[6];
     packet[0] = address;
@@ -14,9 +14,14 @@ void RoboClaw::M1Duty(uint8_t address, uint16_t duty)
 
     write(fd, packet, 6);
     tcdrain(fd);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
+
 }
 
-void RoboClaw::M2Duty(uint8_t address, uint16_t duty)
+bool RoboClaw::M2Duty(uint8_t address, uint16_t duty)
 {
     uint8_t packet[6];
     packet[0] = address;
@@ -30,9 +35,13 @@ void RoboClaw::M2Duty(uint8_t address, uint16_t duty)
 
     write(fd, packet, 6);
     tcdrain(fd);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
 }
 
-void RoboClaw::M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2)
+bool RoboClaw::M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2)
 {
     uint8_t packet[8];
     packet[0] = address;
@@ -48,9 +57,13 @@ void RoboClaw::M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2)
 
     write(fd, packet, 8);
     tcdrain(fd);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
 }
 
-void RoboClaw::M1Speed(uint8_t address, uint32_t speed)
+bool RoboClaw::M1Speed(uint8_t address, uint32_t speed)
 {
     uint8_t packet[8];
     packet[0] = address;
@@ -66,10 +79,13 @@ void RoboClaw::M1Speed(uint8_t address, uint32_t speed)
 
     write(fd, packet, 8);
     tcdrain(fd);
-    usleep(10);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
 }
 
-void RoboClaw::M2Speed(uint8_t address, uint32_t speed)
+bool RoboClaw::M2Speed(uint8_t address, uint32_t speed)
 {
     uint8_t packet[8];
     packet[0] = address;
@@ -85,9 +101,13 @@ void RoboClaw::M2Speed(uint8_t address, uint32_t speed)
 
     write(fd, packet, 8);
     tcdrain(fd);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
 }
 
-void RoboClaw::M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2)
+bool RoboClaw::M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2)
 {
     uint8_t packet[12];
     packet[0] = address;
@@ -107,18 +127,26 @@ void RoboClaw::M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2)
 
     write(fd, packet, 12);
     tcdrain(fd);
+    uint8_t recv;    
+    read(fd, &recv, 1);
+    if(recv == 0xFF) return true;
+    return false;
 }
 
-void RoboClaw::allSpeed(uint32_t speed1, uint32_t speed2, uint32_t speed3, uint32_t speed4)
+bool RoboClaw::allSpeed(uint32_t speed1, uint32_t speed2, uint32_t speed3, uint32_t speed4)
 {
-    M1M2Speed(FRONT_ADDRESS, speed1, speed2);
-    M1M2Speed(BACK_ADDRESS, speed3, speed4);
+    bool recv;
+    recv = M1M2Speed(FRONT_ADDRESS, speed1, speed2);
+    recv &= M1M2Speed(BACK_ADDRESS, speed3, speed4);
+    return recv;
 }
 
-void RoboClaw::allDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4)
+bool RoboClaw::allDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4)
 {
-    M1M2Duty(FRONT_ADDRESS, duty1, duty2);
-    M1M2Duty(BACK_ADDRESS, duty3, duty4);
+    bool recv;
+    recv = M1M2Duty(FRONT_ADDRESS, duty1, duty2);
+    recv &= M1M2Duty(BACK_ADDRESS, duty3, duty4);
+    return recv;
 }
 
 bool RoboClaw::readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encoder2) {
@@ -127,12 +155,6 @@ bool RoboClaw::readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encod
     // Read 10 bytes: 4 bytes of encoder1, 4 bytes of encoder2, 2 CRC
     uint8_t response[10];
     readCommand(address, M1_M2_ENCODERS, response, 10);
-    readCommand(address, M1_M2_ENCODERS, response, 10);
-    
-    for(int i = 0; i < 10; i++)
-    {
-        std::cout << i << " " << (int)response[i] << "\n";
-    }
 
     uint32_t encoderValue1 = ((uint32_t)response[0] << 24) |
                              ((uint32_t)response[1] << 16) |
@@ -156,20 +178,15 @@ bool RoboClaw::readCommand(uint8_t address, uint8_t command, uint8_t* rxData, si
     packet[1] = command;
 
     uint16_t crc = crc16(packet, 2);
-    std::cout << crc << "\n";
 
     // Send command
     if (write(fd, packet, 2) != 2) return false;
+    tcdrain(fd);
     
-    //tcdrain(fd);
-    
-
     // Read response
     ssize_t bytesRead = read(fd, rxData, n);
     if (bytesRead != n) return false;
-    //tcdrain(fd);
-
-    usleep(10);
+    
     // Verify CRC
     crc = crc16(rxData, n - 2, crc);
     uint16_t receivedCrc = (rxData[n - 2] << 8) | rxData[n - 1];

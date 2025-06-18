@@ -10,7 +10,7 @@
 #define FRONT_ADDRESS 0x80
 #define BACK_ADDRESS  0x81
 #define DEFAULT_PORT "/dev/ttyAMA0"
-#define DEFAULT_BAUDS B115200
+#define DEFAULT_BAUDS B38400
 
 enum commands:uint8_t{
     M1_DUTY = 32,
@@ -73,16 +73,16 @@ public:
 
     ~RoboClaw(){close(fd);}
 
-    void M1Duty(uint8_t address, uint16_t duty);
-    void M2Duty(uint8_t address, uint16_t duty);
-    void M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2);
+    bool M1Duty(uint8_t address, uint16_t duty);
+    bool M2Duty(uint8_t address, uint16_t duty);
+    bool M1M2Duty(uint8_t address, uint16_t duty1, uint16_t duty2);
 
-    void M1Speed(uint8_t address, uint32_t speed);
-    void M2Speed(uint8_t address, uint32_t speed);
-    void M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2);
+    bool M1Speed(uint8_t address, uint32_t speed);
+    bool M2Speed(uint8_t address, uint32_t speed);
+    bool M1M2Speed(uint8_t address, uint32_t speed1, uint32_t speed2);
     
-    void allSpeed(uint32_t speed1, uint32_t speed2, uint32_t speed3, uint32_t speed4);
-    void allDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4);
+    bool allSpeed(uint32_t speed1, uint32_t speed2, uint32_t speed3, uint32_t speed4);
+    bool allDuty(uint16_t duty1, uint16_t duty2, uint16_t duty3, uint16_t duty4);
 
     bool readCommand(uint8_t address, uint8_t command, uint8_t* rxData, size_t n);
 

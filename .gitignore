@@ -2,4 +2,5 @@ robot/build
 .vscode
 build
 
+**/test
 
