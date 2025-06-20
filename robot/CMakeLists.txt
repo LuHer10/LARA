@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
-project(robot)
+# ../mylib/CMakeLists.txt
 
-add_executable(${PROJECT_NAME} main.cpp)
-add_library(roboclaw roboclaw.cpp)
+add_library(robotlib
+    roboclaw.cpp
+)
 
-target_link_libraries(${PROJECT_NAME} roboclaw)
+target_include_directories(robotlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
