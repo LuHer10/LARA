@@ -99,7 +99,7 @@ int main() {
             gettimeofday(&last_send_time, NULL);
         }
 
-        usleep(100000);  // 10 Hz loop
+        usleep(10);  // 10 Hz loop
     }
 
     close(sockfd);

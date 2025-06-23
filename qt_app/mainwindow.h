@@ -24,7 +24,7 @@ private slots:
 
 private:
     QUdpSocket *udpSender;
-    QString serverIp = "192.168.1.124";
+    QString serverIp = "127.0.0.1";
     quint16 serverPort = 40000;
 
     QUdpSocket *udpReceiver;
