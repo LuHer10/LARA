@@ -34,15 +34,21 @@ enum motors
     M_BACK_RIGHT    
 };
 
+union int32_u
+{
+    uint32_t t_uint;
+    int32_t t_int;
+};
+
 class Base
 {
 private:
     RoboClaw roboclaw{DEVICE, BAUD_RATE};
 
     //{FL, FR, BL, BR}
-    int32_t targetVelocity[4] = {0};
-    int32_t currVelocity[4] = {0};
-    int32_t encoderCounts[4] = {0};
+    int32_u targetVelocity[4] = {0};
+    int32_u currVelocity[4] = {0};
+    int32_u encoderCounts[4] = {0};
 
     float x, y, ang;
     float vx, vy, vang;
@@ -60,7 +66,7 @@ public:
         roboclaw.M1M2Speed(FRONT_ADDRESS, 0, 0);
         roboclaw.M1M2Speed(BACK_ADDRESS, 0, 0);
     }
-    
+
     ~Base()
     {
         roboclaw.M1M2Speed(FRONT_ADDRESS, 0, 0);

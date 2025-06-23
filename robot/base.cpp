@@ -22,30 +22,30 @@ void Base::setVelocity(float vx, float vy, float vrad)
     for(int i = 0; i < 4; i++)
     {
         vm[i] *= RAD_2_QPPR;
-        targetVelocity[i] = (int32_t)vm[i];
+        targetVelocity[i].t_int = (int32_t)vm[i];
     }
 }
 
 void Base::sendSpeed()
 {
-    roboclaw.M1M2Speed(FRONT_ADDRESS, targetVelocity[M_FRONT_LEFT], targetVelocity[M_FRONT_RIGHT]);
-    roboclaw.M1M2Speed(BACK_ADDRESS, targetVelocity[M_BACK_LEFT], targetVelocity[M_BACK_RIGHT]);
+    roboclaw.M1M2Speed(FRONT_ADDRESS, targetVelocity[M_FRONT_LEFT].t_int, targetVelocity[M_FRONT_RIGHT].t_int);
+    roboclaw.M1M2Speed(BACK_ADDRESS, targetVelocity[M_BACK_LEFT].t_int, targetVelocity[M_BACK_RIGHT].t_int);
 }
 
 void Base::readEncoders()
 {
-    uint32_t encs[4];
+    int32_u encs[4];
     float angs[4] = {0.0F};
     bool front, back;
-    front = roboclaw.readEncoders(FRONT_ADDRESS, encs[M_FRONT_LEFT], encs[M_FRONT_RIGHT]);
-    back  = roboclaw.readEncoders( BACK_ADDRESS, encs[M_BACK_LEFT],  encs[M_BACK_RIGHT]);
+    front = roboclaw.readEncoders(FRONT_ADDRESS, encs[M_FRONT_LEFT].t_uint, encs[M_FRONT_RIGHT].t_uint);
+    back  = roboclaw.readEncoders( BACK_ADDRESS, encs[M_BACK_LEFT].t_uint,  encs[M_BACK_RIGHT].t_uint);
 
     if(front && back)
     {
         for(int i = 0; i < 4; i++)
         {
-            angs[i] = encs[i] - encoderCounts[i];
-            encoderCounts[i] = encs[i];
+            angs[i] = encs[i].t_int - encoderCounts[i].t_int;
+            encoderCounts[i].t_int = encs[i].t_int;
             angs[i] *= QPPR_2_RAD;
         }
 
@@ -59,10 +59,26 @@ void Base::readEncoders()
     }
 }
 
+void Base::readSpeeds()
+{
+    bool front, back;
+    float vangs[4] = {0.0F};
+
+    front = roboclaw.readSpeeds(FRONT_ADDRESS, currVelocity[M_FRONT_LEFT].t_uint, currVelocity[M_FRONT_RIGHT].t_uint);
+    back  = roboclaw.readSpeeds( BACK_ADDRESS, currVelocity[M_BACK_LEFT].t_uint,  currVelocity[M_BACK_RIGHT].t_uint);
+    if(front && back)
+    {
+        for(int i = 0; i < 4; i++)
+            vangs[i] = currVelocity[i].t_uint * QPPR_2_RAD;
+        
+        FK(vangs, vx, vy, vang);
+    }    
+}
+
 void Base::resetOdometry()
 {
     for(int i = 0; i < 4; i++)
-        encoderCounts[i] = 0;
+        encoderCounts[i].t_int = 0;
     x = y = ang = 0.0F;
     roboclaw.resetEncoders(FRONT_ADDRESS);
     roboclaw.resetEncoders(BACK_ADDRESS);
