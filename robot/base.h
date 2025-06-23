@@ -60,6 +60,12 @@ public:
         roboclaw.M1M2Speed(FRONT_ADDRESS, 0, 0);
         roboclaw.M1M2Speed(BACK_ADDRESS, 0, 0);
     }
+    
+    ~Base()
+    {
+        roboclaw.M1M2Speed(FRONT_ADDRESS, 0, 0);
+        roboclaw.M1M2Speed(BACK_ADDRESS, 0, 0);
+    }
 
     void setVelocity(float vx, float vy, float vrad);
 
