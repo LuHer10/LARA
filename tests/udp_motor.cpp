@@ -79,7 +79,7 @@ int main() {
             pre_x_right = x_right;
             pre_y_right = y_right;
             sscanf(buffer, "%f %f %f %f", &x_left, &y_left, &x_right, &y_right);
-            printf("%f %f %f %f\n", x_left, y_left, x_right, y_right);
+            //printf("%f %f %f %f\n", x_left, y_left, x_right, y_right);
 
             gettimeofday(&last_receive_time, NULL);
             timeout_printed = 0;
@@ -112,7 +112,7 @@ int main() {
         // Send system time every 1 second
         gettimeofday(&current_time, NULL);
         long send_elapsed = (current_time.tv_sec*1000000 + current_time.tv_usec) - (last_send_time.tv_sec*1000000 + last_send_time.tv_usec);
-        if (send_elapsed >= 500000 && client_known) {
+        if (send_elapsed >= 100000 && client_known) {
             // Prepare client address for sending (port 40001)
             send_addr = client_addr;
             send_addr.sin_port = htons(PORT_SEND);
@@ -122,7 +122,7 @@ int main() {
 
             odo = base.getOdometry();
 
-            snprintf(msg, BUFFER_SIZE, "x: %.2f, y: %.2f, ang: %.2f\n", odo.x, odo.y, odo.ang);
+            snprintf(msg, BUFFER_SIZE, "x: %.4f, y: %.4f, ang: %.4f\n", odo.x, odo.y, odo.ang);
             //printf("%s", msg);
             // ctime adds a newline at the end
 
@@ -145,7 +145,7 @@ int main() {
             base.sendSpeed();
         }
 
-        usleep(1000);  // 10 Hz loop
+        usleep(10);  // 10 Hz loop
     }
 
     close(sockfd);
