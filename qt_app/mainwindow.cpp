@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     sendTimer = new QTimer(this);
     connect(sendTimer, &QTimer::timeout, this, &MainWindow::sendJoystickData);
-    sendTimer->start(10); // every 100ms
+    sendTimer->start(100); // every 100ms
 
     QWidget *central = new QWidget(this);
     QVBoxLayout *mainLayout = new QVBoxLayout(central);
@@ -46,8 +46,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::sendJoystickData()
 {
-    QByteArray data = QString("L:%1,%2  R:%3,%4")
-                          .arg(leftX).arg(leftY).arg(rightX).arg(rightY).toUtf8();
+    QByteArray data = QString("%1 %2 %3 %4")
+                          .arg(leftX).arg(-leftY).arg(rightX).arg(-rightY).toUtf8();
     udpSender->writeDatagram(data, QHostAddress(serverIp), serverPort);
 }
 
