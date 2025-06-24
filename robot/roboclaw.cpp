@@ -212,7 +212,7 @@ bool RoboClaw::resetEncoders(uint8_t address)
     return false;
 }
 
-bool RoboClaw::readSpeeds(uint8_t address, uint32_t& speed1, uint32_t& speed2)
+bool RoboClaw::readSpeeds(uint8_t address, int32_t& speed1, int32_t& speed2)
 {
     bool recv;
     uint8_t response[7];

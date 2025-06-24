@@ -93,7 +93,7 @@ public:
     bool readEncoders(uint8_t address, uint32_t& encoder1, uint32_t& encoder2);
     bool resetEncoders(uint8_t address);
 
-    bool readSpeeds(uint8_t address, uint32_t& speed1, uint32_t& speed2);
+    bool readSpeeds(uint8_t address, int32_t& speed1, int32_t& speed2);
 
 };
 

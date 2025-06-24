@@ -1,3 +1,6 @@
+#ifndef BASE_H
+#define BASE_H
+
 #include "roboclaw.h"
 #include <cmath>
 
@@ -52,10 +55,7 @@ private:
 
     float x, y, ang;
     float vx, vy, vang;
-
-    void readEncoders();
-    void readSpeeds();
-    void sendSpeed();
+    
 
 public:
 
@@ -65,6 +65,7 @@ public:
         roboclaw.resetEncoders(BACK_ADDRESS);
         roboclaw.M1M2Speed(FRONT_ADDRESS, 0, 0);
         roboclaw.M1M2Speed(BACK_ADDRESS, 0, 0);
+        resetOdometry();
     }
 
     ~Base()
@@ -81,6 +82,11 @@ public:
     Odometry getOdometry(){return Odometry{x, y, ang};}
     void resetOdometry();
 
+    void sendSpeed();
+    void readEncoders();
+    void readSpeeds();
 
 
 };
+
+#endif 

@@ -64,12 +64,12 @@ void Base::readSpeeds()
     bool front, back;
     float vangs[4] = {0.0F};
 
-    front = roboclaw.readSpeeds(FRONT_ADDRESS, currVelocity[M_FRONT_LEFT].t_uint, currVelocity[M_FRONT_RIGHT].t_uint);
-    back  = roboclaw.readSpeeds( BACK_ADDRESS, currVelocity[M_BACK_LEFT].t_uint,  currVelocity[M_BACK_RIGHT].t_uint);
+    front = roboclaw.readSpeeds(FRONT_ADDRESS, currVelocity[M_FRONT_LEFT].t_int, currVelocity[M_FRONT_RIGHT].t_int);
+    back  = roboclaw.readSpeeds( BACK_ADDRESS, currVelocity[M_BACK_LEFT].t_int,  currVelocity[M_BACK_RIGHT].t_int);
     if(front && back)
     {
         for(int i = 0; i < 4; i++)
-            vangs[i] = currVelocity[i].t_uint * QPPR_2_RAD;
+            vangs[i] = currVelocity[i].t_int * QPPR_2_RAD;
         
         FK(vangs, vx, vy, vang);
     }    
