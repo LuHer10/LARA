@@ -105,11 +105,11 @@ int main() {
                 x_left = 0.0F;
                 y_left = 0.0F;
                 x_right = 0.0F;
-                y_left = 0.0F;
+                y_right = 0.0F;
             }
         }
 
-        // Send system time every 1 second
+        // Send system time every 100 ms
         gettimeofday(&current_time, NULL);
         long send_elapsed = (current_time.tv_sec*1000000 + current_time.tv_usec) - (last_send_time.tv_sec*1000000 + last_send_time.tv_usec);
         if (send_elapsed >= 100000 && client_known) {
@@ -117,14 +117,11 @@ int main() {
             send_addr = client_addr;
             send_addr.sin_port = htons(PORT_SEND);
 
-            time_t now = time(NULL);
             char msg[BUFFER_SIZE];
 
             odo = base.getOdometry();
 
             snprintf(msg, BUFFER_SIZE, "x: %.4f, y: %.4f, ang: %.4f\n", odo.x, odo.y, odo.ang);
-            //printf("%s", msg);
-            // ctime adds a newline at the end
 
             sendto(sockfd, msg, strlen(msg), 0,
                    (struct sockaddr *)&send_addr, sizeof(send_addr));
