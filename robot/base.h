@@ -12,7 +12,7 @@
 constexpr float WHEEL_RADIUS = WHEEL_DIAMETER/2.0F;
 #define MAX_RPM 330 
 #define LENGTH 0.32F
-#define WIDTH 0.28F
+#define WIDTH 0.32F
 #define PI 3.14159F
 
 constexpr float LX = LENGTH/2.0F;
