@@ -141,7 +141,7 @@ int main() {
 
         if(changed)
         {
-            base.setVelocity(x_left, y_left, 0.0F);
+            base.setVelocity(x_left, y_left, -x_right);
             base.sendSpeed();
         }
 
