@@ -52,8 +52,8 @@ void Base::readEncoders()
         float d_xr, d_yr, d_ang;
         FK(angs, d_xr, d_yr, d_ang);
 
-        x -= d_xr * cos(ang + d_ang/2) - d_yr * sin(ang + d_ang/2);
-        y += d_xr * sin(ang + d_ang/2) + d_yr * cos(ang + d_ang/2);
+        x += -d_xr * cos(ang + d_ang/2) + d_yr * sin(ang + d_ang/2);
+        y +=  d_xr * sin(ang + d_ang/2) + d_yr * cos(ang + d_ang/2);
         ang += d_ang;
 
     }
