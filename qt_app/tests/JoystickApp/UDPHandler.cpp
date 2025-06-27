@@ -8,7 +8,7 @@ UDPHandler::UDPHandler(QObject *parent) : QObject(parent)
 
 void UDPHandler::sendJoystickData(float lx, float ly, float rx, float ry)
 {
-    QString message = QString("L:%1,%2;R:%3,%4").arg(lx).arg(ly).arg(rx).arg(ry);
+    QString message = QString("%1 %2 %3 %4").arg(lx).arg(ly).arg(rx).arg(ry);
     QByteArray datagram = message.toUtf8();
     senderSocket.writeDatagram(datagram, serverAddress, sendPort);
 }

@@ -10,3 +10,18 @@ HEADERS += \
     UDPHandler.h
 
 RESOURCES += qml.qrc
+
+DISTFILES += \
+    ../JoystickApp.pro/AndroidManifest.xml \
+    ../JoystickApp.pro/build.gradle \
+    ../JoystickApp.pro/res/values/libs.xml \
+    ../JoystickApp.pro/res/xml/qtprovider_paths.xml \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/res/values/libs.xml \
+    android/res/xml/qtprovider_paths.xml
+
+contains(ANDROID_TARGET_ARCH,arm64-v8a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/../JoystickApp.pro
+}

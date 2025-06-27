@@ -8,6 +8,8 @@ Window {
     height: 480
     title: qsTr("Dual Joystick UDP App")
 
+    property real joystickSize: height * 6 / 10
+
     property real leftX: 0
     property real leftY: 0
     property real rightX: 0
@@ -36,27 +38,27 @@ Window {
     Rectangle {
         id: leftJoystick
         anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        width: parent.width / 2
-        height: parent.height / 2
+        anchors.verticalCenter: parent.verticalCenter
+        width: joystickSize
+        height: joystickSize
         color: "#DDDDDD"
 
         // Background circle
         Rectangle {
             id: leftBase
             anchors.centerIn: parent
-            width: 200
-            height: 200
-            radius: 100
+            width: joystickSize
+            height: joystickSize
+            radius: joystickSize / 2
             color: "#AAAAAA"
         }
 
         // Joystick knob
         Rectangle {
             id: leftKnob
-            width: 80
-            height: 80
-            radius: 40
+            width: joystickSize / 3
+            height: joystickSize / 3
+            radius: joystickSize / 6
             color: "#4444FF"
             x: leftJoystick.width / 2 - width / 2
             y: leftJoystick.height / 2 - height / 2
@@ -70,7 +72,7 @@ Window {
                     let dx = lt.x - leftJoystick.width / 2
                     let dy = lt.y - leftJoystick.height / 2
                     let distance = Math.sqrt(dx * dx + dy * dy)
-                    let maxRadius = 100
+                    let maxRadius = joystickSize / 2
 
                     if (distance > maxRadius) {
                         let scale = maxRadius / distance
@@ -104,27 +106,27 @@ Window {
     Rectangle {
         id: rightJoystick
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        width: parent.width / 2
-        height: parent.height / 2
+        anchors.verticalCenter: parent.verticalCenter
+        width: joystickSize
+        height: joystickSize
         color: "#BBBBBB"
 
         // Background circle
         Rectangle {
             id: rightBase
             anchors.centerIn: parent
-            width: 200
-            height: 200
-            radius: 100
+            width: joystickSize
+            height: joystickSize
+            radius: parent.height / 2
             color: "#888888"
         }
 
         // Joystick knob
         Rectangle {
             id: rightKnob
-            width: 80
-            height: 80
-            radius: 40
+            width: joystickSize / 3
+            height: joystickSize / 3
+            radius: joystickSize / 6
             color: "#FF4444"
             x: rightJoystick.width / 2 - width / 2
             y: rightJoystick.height / 2 - height / 2
@@ -138,7 +140,7 @@ Window {
                     let dx = rt.x - rightJoystick.width / 2
                     let dy = rt.y - rightJoystick.height / 2
                     let distance = Math.sqrt(dx * dx + dy * dy)
-                    let maxRadius = 100
+                    let maxRadius = joystickSize / 2
 
                     if (distance > maxRadius) {
                         let scale = maxRadius / distance
