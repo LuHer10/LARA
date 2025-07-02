@@ -21,7 +21,7 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            udpHandler.sendJoystickData(leftX, leftY, rightX, rightY)
+            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY)
         }
     }
 
@@ -97,7 +97,7 @@ Window {
 
         Text {
             anchors.centerIn: parent
-            text: "Left"
+            text: "direction"
             color: "white"
         }
     }
@@ -165,7 +165,7 @@ Window {
 
         Text {
             anchors.centerIn: parent
-            text: "Right"
+            text: "rotation"
             color: "white"
         }
     }

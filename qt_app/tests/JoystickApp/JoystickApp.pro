@@ -14,6 +14,11 @@ RESOURCES += qml.qrc
 DISTFILES += \
     ../JoystickApp.pro/AndroidManifest.xml \
     ../JoystickApp.pro/build.gradle \
+    ../JoystickApp.pro/gradle.properties \
+    ../JoystickApp.pro/gradle/wrapper/gradle-wrapper.jar \
+    ../JoystickApp.pro/gradle/wrapper/gradle-wrapper.properties \
+    ../JoystickApp.pro/gradlew \
+    ../JoystickApp.pro/gradlew.bat \
     ../JoystickApp.pro/res/values/libs.xml \
     ../JoystickApp.pro/res/xml/qtprovider_paths.xml \
     android/AndroidManifest.xml \

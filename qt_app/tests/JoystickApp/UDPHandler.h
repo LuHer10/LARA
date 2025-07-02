@@ -22,9 +22,9 @@ private:
     QUdpSocket senderSocket;
     QUdpSocket receiverSocket;
 
-    QHostAddress serverAddress = QHostAddress("192.168.1.100"); // Replace with your server IP
-    quint16 sendPort = 45454;
-    quint16 receivePort = 45455;
+    QHostAddress serverAddress = QHostAddress("192.168.1.124"); // Replace with your server IP
+    quint16 sendPort = 40000;
+    quint16 receivePort = 40001;
 };
 
 #endif // UDPHANDLER_H
