@@ -7,3 +7,4 @@ build
 **/CMakeLists.txt.*
 **/*.user
 
+**/*.FCBak
