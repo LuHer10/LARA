@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GT2 Belt & Center Distance Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    hr {
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>GT2 Timing Belt Calculator</h2>
+
+  <label for="n1">Pulley 1 Teeth (N1):</label>
+  <input type="number" id="n1" value="20">
+
+  <label for="n2">Pulley 2 Teeth (N2):</label>
+  <input type="number" id="n2" value="36">
+
+  <hr>
+
+  <!-- Belt Length from Center Distance -->
+  <h3>Calculate Belt Length</h3>
+
+  <label for="center_dist">Center Distance (mm):</label>
+  <input type="number" id="center_dist" value="60">
+
+  <button onclick="calculateBeltLength()">Get Belt Length</button>
+
+  <div class="result" id="lengthResult"></div>
+
+  <hr>
+
+  <!-- Center Distance from Belt Length -->
+  <h3>Calculate Center Distance</h3>
+
+  <label for="belt_length">Belt Length (mm):</label>
+  <input type="number" id="belt_length" value="176">
+
+  <button onclick="calculateCenterDistance()">Get Center Distance</button>
+
+  <div class="result" id="distanceResult"></div>
+
+  <script>
+    function calculateBeltLength() {
+      const N1 = parseFloat(document.getElementById('n1').value);
+      const N2 = parseFloat(document.getElementById('n2').value);
+      const C = parseFloat(document.getElementById('center_dist').value);
+      const P = 2.0;
+
+      const D1 = (N1 * P) / Math.PI;
+      const D2 = (N2 * P) / Math.PI;
+
+      const L = Math.PI * ((D1 + D2) / 2) + 2 * C + Math.pow(D2 - D1, 2) / (4 * C);
+      const beltTeeth = Math.round(L / P);
+
+      document.getElementById('lengthResult').innerHTML = `
+        Belt Length: ${L.toFixed(2)} mm
+      `;
+    }
+
+    function calculateCenterDistance() {
+      const N1 = parseFloat(document.getElementById('n1').value);
+      const N2 = parseFloat(document.getElementById('n2').value);
+      const L = parseFloat(document.getElementById('belt_length').value);
+      const P = 2.0;
+
+      const D1 = (N1 * P) / Math.PI;
+      const D2 = (N2 * P) / Math.PI;
+
+      // Binary search to solve for center distance
+      let C_low = 0.1;
+      let C_high = 1000;
+      let C = 0;
+      const tolerance = 0.01;
+      let iterations = 0;
+
+      while ((C_high - C_low) > tolerance && iterations < 1000) {
+        C = (C_low + C_high) / 2;
+        const L_est = Math.PI * ((D1 + D2) / 2) + 2 * C + Math.pow(D2 - D1, 2) / (4 * C);
+        if (L_est > L) {
+          C_high = C;
+        } else {
+          C_low = C;
+        }
+        iterations++;
+      }
+
+      document.getElementById('distanceResult').innerHTML = `
+        Center Distance: ${C.toFixed(2)} mm
+      `;
+    }
+  </script>
+
+</body>
+</html>
+
