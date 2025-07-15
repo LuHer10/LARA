@@ -50,11 +50,11 @@ int main() {
 
         if(changed)
         {
-            base.setVelocity(x_left, y_left, -x_right);
+            base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
             base.sendSpeed();
         }
 
-        usleep(10);  // 10 Hz loop
+        //sleep(10);  // 10 Hz loop
     }
 
     return 0;
