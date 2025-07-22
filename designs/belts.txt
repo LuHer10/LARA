@@ -1,17 +1,20 @@
 https://www.gearsandsprockets.co.uk/gt2-pulley-calculator/
 
 
-25T - 50T:
-Belt length: 738mm
-Distance: 331.40mm
-https://www.amazon.es/UOGVSED-Ctongrun-Correa-distribuci%C3%B3n-660mm-976mm-Resistente/dp/B0F5QPDXM1/ref=sr_1_59?crid=2UDGL84Z33R20&dib=eyJ2IjoiMSJ9.aWppEQ65gEtI4hZsHbeZXZC28swaXvllxqkcNucKn5n-7Ge4qWtzZHabtyrHYn5B2UkmsapBldW5O7SbRBJc9jZMDhu6R-SwfFf-7bpXXdKgTMc4rHY1bv1CFYxpRfZVuMrtbMCbr1V0HJk6-ZZfIUUT9jfY-S-B6-8GArZJ0ZZmPbB0ZfWOov8fPsks7o5hHG2TN_qupnrFgMg0pBxcSCyLOAM43JGFrOzaWGfR0C1KLc6o0t8Pp_tbJd3gWTIQrIzdA5P4wgpR-XS49IhhQ8rDTvcV-JskN6xnl1Az1rw.zR3Ac7dVNWDjpOC-LTM_-Jw7GGZ8_aD5Me4PvQ1eqtM&dib_tag=se&keywords=gt2%2Bbelt&qid=1751452329&sprefix=gt2%2B%2Caps%2C109&sr=8-59&xpid=Pv787SNt8eFI-&th=1
+24T - 48T:
+Belt length: 752mm
+Distance: 339.92mm
 
-Belt length: 800mm
-Distance: 362.41mm
-https://www.amazon.es/UOGVSED-Ctongrun-Correa-distribuci%C3%B3n-660mm-976mm-Resistente/dp/B0F4XH38KG/ref=sr_1_59?crid=2UDGL84Z33R20&dib=eyJ2IjoiMSJ9.aWppEQ65gEtI4hZsHbeZXZC28swaXvllxqkcNucKn5n-7Ge4qWtzZHabtyrHYn5B2UkmsapBldW5O7SbRBJc9jZMDhu6R-SwfFf-7bpXXdKgTMc4rHY1bv1CFYxpRfZVuMrtbMCbr1V0HJk6-ZZfIUUT9jfY-S-B6-8GArZJ0ZZmPbB0ZfWOov8fPsks7o5hHG2TN_qupnrFgMg0pBxcSCyLOAM43JGFrOzaWGfR0C1KLc6o0t8Pp_tbJd3gWTIQrIzdA5P4wgpR-XS49IhhQ8rDTvcV-JskN6xnl1Az1rw.zR3Ac7dVNWDjpOC-LTM_-Jw7GGZ8_aD5Me4PvQ1eqtM&dib_tag=se&keywords=gt2%2Bbelt&qid=1751452329&sprefix=gt2%2B%2Caps%2C109&sr=8-59&xpid=Pv787SNt8eFI-&th=1
+https://www.amazon.es/UOGVSED-Ctongrun-Correa-distribuci%C3%B3n-660mm-976mm-Resistente/dp/B0F4XGNXVG/ref=sr_1_59?crid=2UDGL84Z33R20&dib=eyJ2IjoiMSJ9.aWppEQ65gEtI4hZsHbeZXZC28swaXvllxqkcNucKn5n-7Ge4qWtzZHabtyrHYn5B2UkmsapBldW5O7SbRBJc9jZMDhu6R-SwfFf-7bpXXdKgTMc4rHY1bv1CFYxpRfZVuMrtbMCbr1V0HJk6-ZZfIUUT9jfY-S-B6-8GArZJ0ZZmPbB0ZfWOov8fPsks7o5hHG2TN_qupnrFgMg0pBxcSCyLOAM43JGFrOzaWGfR0C1KLc6o0t8Pp_tbJd3gWTIQrIzdA5P4wgpR-XS49IhhQ8rDTvcV-JskN6xnl1Az1rw.zR3Ac7dVNWDjpOC-LTM_-Jw7GGZ8_aD5Me4PvQ1eqtM&dib_tag=se&keywords=gt2%2Bbelt&qid=1751452329&sprefix=gt2%2B%2Caps%2C109&sr=8-59&xpid=Pv787SNt8eFI-&th=1
+
+https://es.aliexpress.com/item/1005008778076494.html?spm=a2g0o.productlist.main.4.1fdc36846T74NQ&algo_pvid=61b68e19-057c-4538-a309-a7d1ffba21d4&algo_exp_id=61b68e19-057c-4538-a309-a7d1ffba21d4-3&pdp_ext_f=%7B%22order%22%3A%2262%22%2C%22eval%22%3A%221%22%7D&pdp_npi=4%40dis%21EUR%211.28%210.99%21%21%2110.47%218.10%21%40211b6a7a17531743550236109e4373%2112000046631171960%21sea%21ES%210%21ABX&curPageLogUid=XAFoquhUuvGC&utparam-url=scene%3Asearch%7Cquery_from%3A
+
  
-50T - 50T
-Belt length: 900mm
-Distance: 400.00mm
-https://www.amazon.es/UOGVSED-Ctongrun-Correa-distribuci%C3%B3n-660mm-976mm-Resistente/dp/B0F4XK45Q2/ref=sr_1_59?crid=2UDGL84Z33R20&dib=eyJ2IjoiMSJ9.aWppEQ65gEtI4hZsHbeZXZC28swaXvllxqkcNucKn5n-7Ge4qWtzZHabtyrHYn5B2UkmsapBldW5O7SbRBJc9jZMDhu6R-SwfFf-7bpXXdKgTMc4rHY1bv1CFYxpRfZVuMrtbMCbr1V0HJk6-ZZfIUUT9jfY-S-B6-8GArZJ0ZZmPbB0ZfWOov8fPsks7o5hHG2TN_qupnrFgMg0pBxcSCyLOAM43JGFrOzaWGfR0C1KLc6o0t8Pp_tbJd3gWTIQrIzdA5P4wgpR-XS49IhhQ8rDTvcV-JskN6xnl1Az1rw.zR3Ac7dVNWDjpOC-LTM_-Jw7GGZ8_aD5Me4PvQ1eqtM&dib_tag=se&keywords=gt2%2Bbelt&qid=1751452329&sprefix=gt2%2B%2Caps%2C109&sr=8-59&xpid=Pv787SNt8eFI-&th=1
+48T - 48T
+Belt length: 852mm
+Distance: 378mm
+
+https://www.amazon.es/UOGVSED-Ctongrun-Correa-distribuci%C3%B3n-660mm-976mm-Resistente/dp/B0F4XK1MRR/ref=sr_1_59?crid=2UDGL84Z33R20&dib=eyJ2IjoiMSJ9.aWppEQ65gEtI4hZsHbeZXZC28swaXvllxqkcNucKn5n-7Ge4qWtzZHabtyrHYn5B2UkmsapBldW5O7SbRBJc9jZMDhu6R-SwfFf-7bpXXdKgTMc4rHY1bv1CFYxpRfZVuMrtbMCbr1V0HJk6-ZZfIUUT9jfY-S-B6-8GArZJ0ZZmPbB0ZfWOov8fPsks7o5hHG2TN_qupnrFgMg0pBxcSCyLOAM43JGFrOzaWGfR0C1KLc6o0t8Pp_tbJd3gWTIQrIzdA5P4wgpR-XS49IhhQ8rDTvcV-JskN6xnl1Az1rw.zR3Ac7dVNWDjpOC-LTM_-Jw7GGZ8_aD5Me4PvQ1eqtM&dib_tag=se&keywords=gt2%2Bbelt&qid=1751452329&sprefix=gt2%2B%2Caps%2C109&sr=8-59&xpid=Pv787SNt8eFI-&th=1
+
+https://es.aliexpress.com/item/1005008778076494.html?spm=a2g0o.productlist.main.4.1fdc36846T74NQ&algo_pvid=61b68e19-057c-4538-a309-a7d1ffba21d4&algo_exp_id=61b68e19-057c-4538-a309-a7d1ffba21d4-3&pdp_ext_f=%7B%22order%22%3A%2262%22%2C%22eval%22%3A%221%22%7D&pdp_npi=4%40dis%21EUR%211.28%210.99%21%21%2110.47%218.10%21%40211b6a7a17531743550236109e4373%2112000046631171960%21sea%21ES%210%21ABX&curPageLogUid=XAFoquhUuvGC&utparam-url=scene%3Asearch%7Cquery_from%3A
 
