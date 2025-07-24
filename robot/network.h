@@ -16,6 +16,10 @@
 #define BUFFER_SIZE 1024
 #define TIMEOUT_SECONDS 2
 
+#define EXPECTED_PACKET_SIZE 17
+#define HEADER_BYTE 0xAB
+#define SEND_PACKET_SIZE 13 //1 header + 3 floats
+
 class Network
 {
     int sockfd;
