@@ -1,3 +1,5 @@
+#ifndef SERVO_H
+#define SERVO_H
 #include <fcntl.h>
 #include <termios.h>
 #define STDIN_FILENO 0
@@ -5,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <cmath>
 
 #include "dynamixel_sdk.h"  // Uses DYNAMIXEL SDK library
 
@@ -17,15 +20,24 @@
 
 #define PROTOCOL_VERSION  2.0
 
-#define DXL_ID  1
-
 #define DEVICENAME  "/dev/ttyUSB0"
 
 #define TORQUE_ENABLE                   1
 #define TORQUE_DISABLE                  0
-#define DXL_MOVING_STATUS_THRESHOLD     20  // DYNAMIXEL moving status threshold
-#define ESC_ASCII_VALUE                 0x1b
 
+int32_t degToPos(float ang)
+{
+    float fout = (ang/360.0f)*MAXIMUM_POSITION_LIMIT;
+    int32_t out = (int32_t)fout;
+    return out;
+}
+
+int32_t radToPos(float rad)
+{
+    float fout = (rad/(2.0f*M_PI))*MAXIMUM_POSITION_LIMIT;
+    int32_t out = (int32_t)fout;
+    return out;
+}
 
 class Servo
 {
@@ -48,4 +60,8 @@ public:
     void disableTorque(int id);
     void writePos(int id, int32_t pos);
     int32_t readPos(int id);
+
+    
 };
+
+#endif
