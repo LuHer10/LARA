@@ -9,10 +9,10 @@ inline void Base::FK(const float vm[4], float &vx, float &vy, float &vrad)
 
 inline void Base::IK(const float &vx, const float &vy, const float &vrad, float vm[4])
 {
-    vm[0] =  vx + vy - vrad*LXY;
-    vm[1] = -vx + vy + vrad*LXY;
-    vm[2] = -vx + vy - vrad*LXY;
-    vm[3] =  vx + vy + vrad*LXY;
+    vm[0] = ( vx + vy - vrad*LXY) / WHEEL_RADIUS;
+    vm[1] = (-vx + vy + vrad*LXY) / WHEEL_RADIUS;
+    vm[2] = (-vx + vy - vrad*LXY) / WHEEL_RADIUS;
+    vm[3] = ( vx + vy + vrad*LXY) / WHEEL_RADIUS;
 }
 
 void Base::setVelocity(float vx, float vy, float vrad)
