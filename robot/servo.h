@@ -18,6 +18,11 @@
 #define MAXIMUM_POSITION_LIMIT      4095  // Refer to the Maximum Position Limit of product eManual
 #define BAUDRATE                    57600
 
+#define ADDR_OPERATING_MODE 11
+#define POSITION_CONTROL 3
+#define EXTENDED_POSITION_CONTROL 4
+
+
 #define PROTOCOL_VERSION  2.0
 
 #define DEVICENAME  "/dev/ttyUSB0"
@@ -53,9 +58,15 @@ private:
     int32_t goalPos[253];
     int32_t currPos[253];
 
+    bool torque_enabled[253] = {false};
+
 public:
     int init();
     int init(const char *devName);
+
+    void posContMode(int id);
+    void extPosContMode(int id);
+
     void enableTorque(int id);
     void disableTorque(int id);
     void writePos(int id, int32_t pos);
