@@ -1,0 +1,45 @@
+#include "arm.h"
+
+void Arm::DK(float q_1, float q_2, float q_3)
+{
+    q1 = q_1;
+    q2 = q_2;
+    q3 = q_3;
+    px = l1 * cos(q1) + l2 * cos(q1 + q2 - 180) + l3 * cos(q1 + q3 - 180);
+    py = l1 * sin(q1) + l2 * sin(q1 + q2 - 180) + l3 * sin(q1 + q3 - 180);
+}
+
+void Arm::IK(float p_x, float p_y, float th)
+{
+    px = p_x;
+    py = p_y;
+    theta = th;
+
+    wx = px - l3 * cos(theta);
+    wy = py - l3 * sin(theta);
+
+    q1 = atan2(wy, wx) + asin((l2 * sin(q2))/sqrt(wx*wx + wy*wy));
+    q2 = acos((l1*l1 + l2*l2 - wx*wx - wy*wy)/(2.0f * l1 * l2));
+    q3 = 180.0f - alpha() + theta;
+    q2m();
+
+}
+
+void Arm::move(float p_x, float p_y, float th)
+{
+    IK(p_x, p_y, th);
+    servos.writePos(1, radToPos(m1));
+    servos.writePos(2, radToPos(m2));
+    servos.writePos(3, radToPos(m3));
+}
+
+void Arm::moveIncr(float dx, float dy, float dth)
+{
+    float p_x = px + dx;
+    float p_y = py + dy;
+    float th = theta + dth;
+    IK(p_x, p_y, th);
+    servos.writePos(1, radToPos(m1));
+    servos.writePos(2, radToPos(m2));
+    servos.writePos(3, radToPos(m3));
+}
