@@ -58,7 +58,7 @@ int Servo::init(const char *devName)
 
 void Servo::posContMode(int id)
 {
-    if(torque_enabled[id] == false) return;
+    if(torque_enabled[id] == true) return;
     dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, id, 
         ADDR_OPERATING_MODE, POSITION_CONTROL, &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS) {
@@ -74,7 +74,7 @@ void Servo::posContMode(int id)
 
 void Servo::extPosContMode(int id)
 {
-    if(torque_enabled[id] == false) return;
+    if(torque_enabled[id] == true) return;
     dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, id, 
         ADDR_OPERATING_MODE, EXTENDED_POSITION_CONTROL, &dxl_error);
     if (dxl_comm_result != COMM_SUCCESS) {
