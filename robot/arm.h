@@ -7,6 +7,8 @@
 #define q2_2_m2 2
 #define q3_2_m3 2
 
+#define MARGIN 0.01f
+
 class Arm
 {
 private:
@@ -66,10 +68,10 @@ public:
     float getPy(){return py;}
 
     void DK(float q_1, float q_2, float q_3);
-    void IK(float p_x, float p_y, float th);
+    int IK(float p_x, float p_y, float th);
 
-    void move(float p_x, float p_y, float th);
-    void moveIncr(float dx, float dy, float dth);
+    int move(float p_x, float p_y, float th);
+    int moveIncr(float dx, float dy, float dth);
 
     void home();
     
