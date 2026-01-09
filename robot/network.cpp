@@ -77,7 +77,7 @@ void Network::receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r, i
             memcpy(&ly, &buffer[5],  sizeof(float));
             memcpy(&rx, &buffer[9],  sizeof(float));
             memcpy(&ry, &buffer[13], sizeof(float));
-            memcpy(&ry, &buffer[17], sizeof(int8_t));
+            memcpy(&grp, &buffer[17], sizeof(int8_t));
             //printf("Received floats: lx=%.2f ly=%.2f rx=%.2f ry=%.2f\n", lx, ly, rx, ry);
 
             x_l = lx;
