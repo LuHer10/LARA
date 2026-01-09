@@ -17,6 +17,8 @@ int main() {
     float x_right = 0.0F;
     float y_right = 0.0F;
 
+    int8_t grip;
+
     float pre_x_left, pre_y_left;
     float pre_x_right, pre_y_right;
 
@@ -35,7 +37,7 @@ int main() {
         pre_x_right = x_right;
         pre_y_right = y_right;
 
-        net.receiveJoysticks(x_left, y_left, x_right, y_right);
+        net.receiveJoysticks(x_left, y_left, x_right, y_right, grip);
 
         base.readEncoders();
 

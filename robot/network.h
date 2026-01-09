@@ -16,7 +16,7 @@
 #define BUFFER_SIZE 1024
 #define TIMEOUT_SECONDS 2
 
-#define EXPECTED_PACKET_SIZE 17
+#define EXPECTED_PACKET_SIZE 18  //1 header + 4 floats + 1 int8
 #define HEADER_BYTE 0xAB
 #define SEND_PACKET_SIZE 13 //1 header + 3 floats
 
@@ -69,7 +69,7 @@ public:
     ssize_t receive(const char *buf);
     void send(const char *buf);
     void sendOdometry(float x, float y, float ang, long dt_us  = 100000);
-    void receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r);
+    void receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r, int8_t &grip);
 };
 
 #endif //NETWORK_H

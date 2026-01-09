@@ -65,23 +65,26 @@ ssize_t Network::receive(const char *buf)
 }
 */
 
-void Network::receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r)
+void Network::receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r, int8_t &grip)
 {
     ssize_t bytes_received = receive(buffer);
 
     if (bytes_received == EXPECTED_PACKET_SIZE && buffer[0] == HEADER_BYTE) {
             float lx, ly, rx, ry;
+            int8_t grp;
 
             memcpy(&lx, &buffer[1],  sizeof(float));
             memcpy(&ly, &buffer[5],  sizeof(float));
             memcpy(&rx, &buffer[9],  sizeof(float));
             memcpy(&ry, &buffer[13], sizeof(float));
+            memcpy(&ry, &buffer[17], sizeof(int8_t));
             //printf("Received floats: lx=%.2f ly=%.2f rx=%.2f ry=%.2f\n", lx, ly, rx, ry);
 
             x_l = lx;
             y_l = ly;
             x_r = rx;
             y_r = ry;
+            grip = grp;
 
             gettimeofday(&last_receive_time, NULL);
             timeout_printed = 0;

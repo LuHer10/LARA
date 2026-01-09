@@ -14,6 +14,8 @@ Window {
     property real leftY: 0
     property real rightX: 0
     property real rightY: 0
+    property int gripEnabled: 0
+
 
     Timer {
         id: sendTimer
@@ -21,7 +23,7 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY)
+            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, gripEnabled)
         }
     }
 
@@ -168,7 +170,27 @@ Window {
             text: "rotation"
             color: "white"
         }
+
     }
+
+    Button {
+        id: gripButton
+        width: 140
+        height: 50
+
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 20
+        anchors.bottomMargin: 20
+
+        checkable: true
+        text: checked ? "Release" : "Grip"
+
+        onCheckedChanged: {
+            gripEnabled = checked
+        }
+    }
+
 
     // Server data connection
     Connections {

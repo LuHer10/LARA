@@ -13,7 +13,7 @@ UDPHandler::UDPHandler(QObject *parent) : QObject(parent)
     senderSocket.writeDatagram(datagram, serverAddress, sendPort);
 }*/
 
-void UDPHandler::sendJoystickData(float lx, float ly, float rx, float ry)
+void UDPHandler::sendJoystickData(float lx, float ly, float rx, float ry, int8_t grip)
 {
     QByteArray datagram;
     QDataStream stream(&datagram, QIODevice::WriteOnly);
@@ -28,6 +28,7 @@ void UDPHandler::sendJoystickData(float lx, float ly, float rx, float ry)
     stream.writeRawData(reinterpret_cast<const char*>(&ly), sizeof(float));
     stream.writeRawData(reinterpret_cast<const char*>(&rx), sizeof(float));
     stream.writeRawData(reinterpret_cast<const char*>(&ry), sizeof(float));
+    stream.writeRawData(reinterpret_cast<const char*>(&grip), sizeof(int8_t));
 
     senderSocket.writeDatagram(datagram, serverAddress, sendPort);
 }
