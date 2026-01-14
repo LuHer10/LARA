@@ -9,7 +9,7 @@
 #include <stdint.h>
 #include <cmath>
 
-#include "dynamixel_sdk.h"  // Uses DYNAMIXEL SDK library
+#include <dynamixel_sdk/dynamixel_sdk.h> // Uses DYNAMIXEL SDK library
 
 #define ADDR_TORQUE_ENABLE          64
 #define ADDR_GOAL_POSITION          116
@@ -30,14 +30,14 @@
 #define TORQUE_ENABLE                   1
 #define TORQUE_DISABLE                  0
 
-int32_t degToPos(float ang)
+inline int32_t degToPos(float ang)
 {
     float fout = (ang/360.0f)*MAXIMUM_POSITION_LIMIT;
     int32_t out = (int32_t)fout;
     return out;
 }
 
-int32_t radToPos(float rad)
+inline int32_t radToPos(float rad)
 {
     float fout = (rad/(2.0f*M_PI))*MAXIMUM_POSITION_LIMIT;
     int32_t out = (int32_t)fout;
