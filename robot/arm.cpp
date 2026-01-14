@@ -5,8 +5,8 @@ void Arm::DK(float q_1, float q_2, float q_3)
     q1 = q_1;
     q2 = q_2;
     q3 = q_3;
-    px = l1 * cos(q1) + l2 * cos(q1 + q2 - 180) + l3 * cos(q1 + q3 - 180);
-    py = l1 * sin(q1) + l2 * sin(q1 + q2 - 180) + l3 * sin(q1 + q3 - 180);
+    px = l1 * cos(q1) + l2 * cos(q1 + q2 - M_PI) + l3 * cos(q1 + q3 - M_PI);
+    py = l1 * sin(q1) + l2 * sin(q1 + q2 - M_PI) + l3 * sin(q1 + q3 - M_PI);
     q2m();
 }
 
