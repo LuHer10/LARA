@@ -3,7 +3,30 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(encoders)
+project(lara)
+
+
+
+find_path(DYNAMIXEL_SDK_INCLUDE_DIR
+    NAMES dynamixel_sdk/dynamixel_sdk.h
+    PATHS /usr/local/include /usr/include
+)
+
+find_library(DYNAMIXEL_SDK_LIBRARY
+    NAMES dxl_x64_cpp
+    PATHS /usr/local/lib /usr/lib
+)
+
+if (NOT DYNAMIXEL_SDK_INCLUDE_DIR OR NOT DYNAMIXEL_SDK_LIBRARY)
+    message(FATAL_ERROR "Dynamixel SDK not found")
+endif()
+
+add_library(dynamixel_sdk UNKNOWN IMPORTED)
+
+set_target_properties(dynamixel_sdk PROPERTIES
+    IMPORTED_LOCATION ${DYNAMIXEL_SDK_LIBRARY}
+    INTERFACE_INCLUDE_DIRECTORIES ${DYNAMIXEL_SDK_INCLUDE_DIR}
+)
 
 # Add the library subdirectory
 add_subdirectory(../robot ${CMAKE_BINARY_DIR}/robot_build)
