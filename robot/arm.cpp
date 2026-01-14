@@ -24,8 +24,10 @@ int Arm::IK(float p_x, float p_y, float th)
 
     q1 = atan2(wy, wx) + asin((l2 * sin(q2))/sqrt(wx*wx + wy*wy));
     q2 = acos((l1*l1 + l2*l2 - wx*wx - wy*wy)/(2.0f * l1 * l2));
-    q3 = 180.0f - alpha() + theta;
+    q3 = M_PI - alpha() + theta;
     q2m();
+
+    std::cout << q1*180.0f/M_PI << " " << q2*180.0f/M_PI << " " << q3*180.0f/M_PI << "\n"; 
 
     return 0;
 
@@ -37,9 +39,10 @@ int Arm::move(float p_x, float p_y, float th)
     err = IK(p_x, p_y, th);
     if(err == -1) return -1;
 
-    servos.writePos(1, radToPos(m1));
-    servos.writePos(2, radToPos(m2));
-    servos.writePos(3, radToPos(m3));
+    servos.writePos(11, radToPos(m1));
+    servos.writePos(30, radToPos(m2));
+    servos.writePos(40, radToPos(m3));
+    return 0;
 }
 
 int Arm::moveIncr(float dx, float dy, float dth)
@@ -51,8 +54,8 @@ int Arm::moveIncr(float dx, float dy, float dth)
     err = IK(p_x, p_y, th);
     if(err == -1) return -1;
 
-    servos.writePos(1, radToPos(m1));
-    servos.writePos(2, radToPos(m2));
-    servos.writePos(3, radToPos(m3));
+    servos.writePos(11, radToPos(m1));
+    servos.writePos(30, radToPos(m2));
+    servos.writePos(40, radToPos(m3));
     return 0;
 }
