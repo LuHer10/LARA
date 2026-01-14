@@ -22,8 +22,9 @@ int Arm::IK(float p_x, float p_y, float th)
     float wl = sqrt(wx*wx + wy*wy);
     if(wl >= (l1+l2 - MARGIN)) return -1;
 
-    q1 = atan2(wy, wx) + asin((l2 * sin(q2))/sqrt(wx*wx + wy*wy));
     q2 = acos((l1*l1 + l2*l2 - wx*wx - wy*wy)/(2.0f * l1 * l2));
+    q1 = atan2(wy, wx) + asin((l2 * sin(q2))/sqrt(wx*wx + wy*wy));
+    
     q3 = M_PI - alpha() + theta;
     q2m();
 
