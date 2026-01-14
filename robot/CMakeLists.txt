@@ -5,6 +5,7 @@ add_library(robotlib
     base.cpp
     network.cpp
     servo.cpp
+    arm.cpp
 )
 
 target_include_directories(robotlib
