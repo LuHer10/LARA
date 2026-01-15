@@ -44,11 +44,9 @@ public:
         q2 = M_PI/2.0f;
         q3 = M_PI/2.0f;
 
-        m1 = q1 * q1_2_m1;
-        m2 = q2 * q2_2_m2;
-        m3 = q3 * q3_2_m3;
+        q2m(q1, q2, q3, m1, m2, m3);
 
-        theta = M_PI/2.0f;
+        theta = 0.0f;
 
         servos.writePos(11, radToPos(m1));
         servos.writePos(30, radToPos(m2));
@@ -62,7 +60,7 @@ public:
         servos.disableTorque(10);
         servos.disableTorque(20);
         servos.disableTorque(30);
-        servos.disableTorque(30);
+        servos.disableTorque(40);
     }
 
     void setP(float p_x, float p_y)
@@ -82,11 +80,11 @@ public:
 
     void home();
     
-    void q2m()
+    void q2m(float q_1, float q_2, float q_3, float &m_1, float &m_2, float &m_3)
     {
-        m1 = q1 * q1_2_m1;
-        m2 = q2 * q2_2_m2;
-        m3 = q3 * q3_2_m3;
+        m_1 = q_1 * q1_2_m1;
+        m_2 = q_2 * q2_2_m2;
+        m_3 = q_3 * q3_2_m3;
     }
 
 
