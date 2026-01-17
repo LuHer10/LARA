@@ -8,6 +8,10 @@
 #define q2_2_m2 2.0f
 #define q3_2_m3 2.0f
 
+#define GRIPPER_OPEN  3.0f*M_PI/4.0f
+#define GRIPPER_CLOSE M_PI/2.0f
+
+
 #define MARGIN 0.01f
 
 class Arm
@@ -23,6 +27,8 @@ private:
     float wx, wy;
     
     float m1, m2, m3;
+
+
 
     float alpha(){return q1;}
 
@@ -73,7 +79,10 @@ public:
     float getPy(){return py;}
 
     void DK(float q_1, float q_2, float q_3);
-    int IK(float p_x, float p_y, float th);
+    int  IK(float p_x, float p_y, float th);
+
+    void DK(float q_1, float q_2, float q_3, float &p_x, float &p_y, float &th);
+    int  IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3);
 
     int move(float p_x, float p_y, float th);
     int moveIncr(float dx, float dy, float dth);
@@ -86,6 +95,9 @@ public:
         m_2 = q_2 * q2_2_m2;
         m_3 = q_3 * q3_2_m3;
     }
+
+    void open();
+    void close();
 
 
 };

@@ -39,6 +39,29 @@ int Arm::IK(float p_x, float p_y, float th)
 
 }
 
+void Arm::DK(float q_1, float q_2, float q_3, float &p_x, float &p_y, float &th)
+{
+    float a = q_1;
+    p_x = l1 * cos(q_1) + l2 * cos(q_1 + q_2 - M_PI) + l3 * cos(q_1 + q_3 - M_PI);
+    p_y = l1 * sin(q_1) + l2 * sin(q_1 + q_2 - M_PI) + l3 * sin(q_1 + q_3 - M_PI);
+    th = q_3 - M_PI + a;
+}
+int  Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
+{
+    float w_x = p_x - l3 * cos(th);
+    float w_y = p_y - l3 * sin(th);
+
+    float wl = sqrt(wx*wx + wy*wy);
+    if(wl >= (l1+l2 - MARGIN)) return -1;
+
+    q_2 = acos((l1*l1 + l2*l2 - w_x*w_x - w_y*w_y)/(2.0f * l1 * l2));
+    q_1 = atan2(w_y, w_x) + asin((l2 * sin(q_2))/sqrt(w_x*w_x + w_y*w_y));
+    
+    float a = q_1;
+
+    q_3 = M_PI - a + theta;
+}
+
 int Arm::move(float p_x, float p_y, float th)
 {
     int err = 0;
