@@ -1,36 +1,42 @@
 #include "arm.h"
 
-void Arm::DK(float q_1, float q_2, float q_3)
+int Arm::DK(float q_1, float q_2, float q_3)
 {
+    float p_x, p_y, th;
+
+    int err = DK(q_1, q_2,  q_3, p_x, p_y, th);
+    if(err) return err;
+
     q1 = q_1;
     q2 = q_2;
     q3 = q_3;
-    px = l1 * cos(q1) + l2 * cos(q1 + q2 - M_PI) + l3 * cos(q1 + q3 - M_PI);
-    py = l1 * sin(q1) + l2 * sin(q1 + q2 - M_PI) + l3 * sin(q1 + q3 - M_PI);
-    theta = q3 - M_PI + alpha();
+
+    px = p_x;
+    py = p_y;
+    theta = th;
+
     q2m(q1, q2, q3, m1, m2, m3);
+
+    return 0;
 }
 
 int Arm::IK(float p_x, float p_y, float th)
 {
     
+    float q_1, q_2, q_3;
+    int err = IK(p_x, p_y, th, q_1, q_2, q_3);
 
-    float w_x = p_x - l3 * cos(th);
-    float w_y = p_y - l3 * sin(th);
-
-    float wl = sqrt(wx*wx + wy*wy);
-    if(wl >= (l1+l2 - MARGIN)) return -1;
+    if(err) return err;
+    
 
     px = p_x;
     py = p_y;
     theta = th;
-    wx = w_x;
-    wy = w_y;
-
-    q2 = acos((l1*l1 + l2*l2 - wx*wx - wy*wy)/(2.0f * l1 * l2));
-    q1 = atan2(wy, wx) + asin((l2 * sin(q2))/sqrt(wx*wx + wy*wy));
     
-    q3 = M_PI - alpha() + theta;
+    q1 = q_1;
+    q2 = q_2;
+    q3 = q_3;
+    
     q2m(q1, q2, q3, m1, m2, m3);
 
     //std::cout << q1*180.0f/M_PI << " " << q2*180.0f/M_PI << " " << q3*180.0f/M_PI << "\n"; 
@@ -39,14 +45,16 @@ int Arm::IK(float p_x, float p_y, float th)
 
 }
 
-void Arm::DK(float q_1, float q_2, float q_3, float &p_x, float &p_y, float &th)
+int Arm::DK(float q_1, float q_2, float q_3, float &p_x, float &p_y, float &th)
 {
-    float a = q_1;
+    int err = test_qs(q_1, q_2, q_3);
+    if(err == -1) return -1;
+    float alpha = q_1;
     p_x = l1 * cos(q_1) + l2 * cos(q_1 + q_2 - M_PI) + l3 * cos(q_1 + q_3 - M_PI);
     p_y = l1 * sin(q_1) + l2 * sin(q_1 + q_2 - M_PI) + l3 * sin(q_1 + q_3 - M_PI);
-    th = q_3 - M_PI + a;
+    th = q_3 - M_PI + alpha;
 }
-int  Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
+int Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
 {
     float w_x = p_x - l3 * cos(th);
     float w_y = p_y - l3 * sin(th);
@@ -57,9 +65,13 @@ int  Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
     q_2 = acos((l1*l1 + l2*l2 - w_x*w_x - w_y*w_y)/(2.0f * l1 * l2));
     q_1 = atan2(w_y, w_x) + asin((l2 * sin(q_2))/sqrt(w_x*w_x + w_y*w_y));
     
-    float a = q_1;
+    float alpha = q_1;
 
-    q_3 = M_PI - a + theta;
+    q_3 = M_PI - alpha + theta;
+
+    int err = test_qs(q_1, q_2, q_3);
+    return err;
+
 }
 
 int Arm::move(float p_x, float p_y, float th)
@@ -103,3 +115,16 @@ void Arm::home()
     servos.writePos(30, radToPos(m2));
     servos.writePos(40, radToPos(m3));
 }
+
+int Arm::test_qs(float q_1, float q_2, float q_3)
+{
+    if(q_2 >= 135.0f*M_PI/180.0f) return -1;
+    if(q_2 <= 45.0f*M_PI/180.0f) return -1;
+    if(q_1 >= 170.0f*M_PI/180.0f) return -1;
+    if(q_1 <= 10.0f*M_PI/180.0f) return -1;
+    if(q_3 >= 135.0f*M_PI/180.0f) return -1;
+    if(q_3 <= 45.0f*M_PI/180.0f) return -1;
+
+    return 0;
+}
+
