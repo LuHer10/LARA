@@ -56,6 +56,7 @@ int main() {
 
         arm.get_qs(q1, q2, q3);
         arm.DK(q1, q2, q3, arm_x, arm_y, arm_th);
+        arm.get_pos(arm_x, arm_y, arm_th);
 
         changed = (pre_x_left != x_left)
                 || (pre_y_left != y_left)
@@ -64,22 +65,28 @@ int main() {
 
         if(changed)
         {
-            if(arm_x > 0.7f || arm_x < 0.3f)
-            {
+            //if(arm_x > 0.7f || arm_x < 0.3f)
+            //{
                 base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
                 base.sendSpeed();
-                arm.moveIncr(0.0f, y_right*0.1f, 0.0f);
-            }
-            else
-            {
-                arm.moveIncr(y_left*0.1f, y_right*0.1f, 0.0f);
-            }
+                //arm.moveIncr(0.0f, y_right*0.1f, 0.0f);
+            //}
+            //else
+            //{
+                //arm.moveIncr(y_left*0.1f, y_right*0.1f, 0.0f);
+            //}
 
             
         }
 
-        //sleep(10);  // 10 Hz loop
-    }
+        arm.moveIncr(y_left*0.05f, y_right*0.05f, 0.0f);
 
+        printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
+
+        printf("%f, %f, %f, %f, %d", x_left, y_left, x_right, y_right, grip);
+
+        usleep(100);  // 10 Hz loop
+    
+    }
     return 0;
 }

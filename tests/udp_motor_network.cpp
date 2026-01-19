@@ -56,7 +56,8 @@ int main() {
             base.sendSpeed();
         }
 
-        //sleep(10);  // 10 Hz loop
+        usleep(10000);  // 10 Hz loop
+        printf("%f, %f, %f, %f, %d\n", x_left, y_left, x_right, y_right, grip);
     }
 
     return 0;

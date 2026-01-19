@@ -15,6 +15,7 @@ Window {
     property real rightX: 0
     property real rightY: 0
     property int gripEnabled: 0
+    property int gripDown: 0
 
 
     Timer {
@@ -23,7 +24,7 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, gripEnabled)
+            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, gripDown << 1 | gripEnabled)
         }
     }
 
@@ -175,19 +176,37 @@ Window {
 
     Button {
         id: gripButton
-        width: 140
+        width: 100
         height: 50
 
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 20
-        anchors.bottomMargin: 20
+        anchors.rightMargin: 200
+        anchors.bottomMargin: 10
 
         checkable: true
         text: checked ? "Release" : "Grip"
 
         onCheckedChanged: {
             gripEnabled = checked
+        }
+    }
+
+    Button {
+        id: tiltButton
+        width: 100
+        height: 50
+
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 200
+        anchors.bottomMargin: 10
+
+        checkable: true
+        text: checked ? "Front" : "Down"
+
+        onCheckedChanged: {
+            gripDown = checked
         }
     }
 

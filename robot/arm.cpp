@@ -5,7 +5,7 @@ int Arm::DK(float q_1, float q_2, float q_3)
     float p_x, p_y, th;
 
     int err = DK(q_1, q_2,  q_3, p_x, p_y, th);
-    if(err) return err;
+    //if(err) return err;
 
     q1 = q_1;
     q2 = q_2;
@@ -26,7 +26,7 @@ int Arm::IK(float p_x, float p_y, float th)
     float q_1, q_2, q_3;
     int err = IK(p_x, p_y, th, q_1, q_2, q_3);
 
-    if(err) return err;
+    //if(err) return err;
     
 
     px = p_x;
@@ -47,12 +47,13 @@ int Arm::IK(float p_x, float p_y, float th)
 
 int Arm::DK(float q_1, float q_2, float q_3, float &p_x, float &p_y, float &th)
 {
-    int err = test_qs(q_1, q_2, q_3);
-    if(err == -1) return -1;
+    int err = 0;//test_qs(q_1, q_2, q_3);
+    //if(err == -1) return -1;
     float alpha = q_1;
     p_x = l1 * cos(q_1) + l2 * cos(q_1 + q_2 - M_PI) + l3 * cos(q_1 + q_3 - M_PI);
     p_y = l1 * sin(q_1) + l2 * sin(q_1 + q_2 - M_PI) + l3 * sin(q_1 + q_3 - M_PI);
     th = q_3 - M_PI + alpha;
+    return 0;
 }
 int Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
 {
@@ -60,7 +61,7 @@ int Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
     float w_y = p_y - l3 * sin(th);
 
     float wl = sqrt(wx*wx + wy*wy);
-    if(wl >= (l1+l2 - MARGIN)) return -1;
+    //if(wl >= (l1+l2 - MARGIN)) return -1;
 
     q_2 = acos((l1*l1 + l2*l2 - w_x*w_x - w_y*w_y)/(2.0f * l1 * l2));
     q_1 = atan2(w_y, w_x) + asin((l2 * sin(q_2))/sqrt(w_x*w_x + w_y*w_y));
@@ -69,7 +70,7 @@ int Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
 
     q_3 = M_PI - alpha + theta;
 
-    int err = test_qs(q_1, q_2, q_3);
+    int err = 0; //test_qs(q_1, q_2, q_3);
     return err;
 
 }
@@ -78,7 +79,7 @@ int Arm::move(float p_x, float p_y, float th)
 {
     int err = 0;
     err = IK(p_x, p_y, th);
-    if(err == -1) return -1;
+    //if(err == -1) return -1;
 
     servos.writePos(11, radToPos(m1));
     servos.writePos(30, radToPos(m2));
@@ -93,7 +94,7 @@ int Arm::moveIncr(float dx, float dy, float dth)
     float p_y = py + dy;
     float th = theta + dth;
     err = IK(p_x, p_y, th);
-    if(err == -1) return -1;
+    //if(err == -1) return -1;
 
     servos.writePos(11, radToPos(m1));
     servos.writePos(30, radToPos(m2));

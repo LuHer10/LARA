@@ -13,7 +13,7 @@ find_path(DYNAMIXEL_SDK_INCLUDE_DIR
 )
 
 find_library(DYNAMIXEL_SDK_LIBRARY
-    NAMES dxl_x64_cpp
+    NAMES dxl_sbc_cpp
     PATHS /usr/local/lib /usr/lib
 )
 
