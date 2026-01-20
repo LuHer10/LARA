@@ -89,6 +89,13 @@ Window {
                     leftX = dx / maxRadius
                     leftY = dy / maxRadius
 
+                    if(Math.abs(leftX) < 0.1){
+                        leftX = 0
+                    }
+                    if(Math.abs(leftY) < 0.1){
+                        leftY = 0
+                    }
+
                 } else {
                     leftKnob.x = leftJoystick.width / 2 - leftKnob.width / 2
                     leftKnob.y = leftJoystick.height / 2 - leftKnob.height / 2
@@ -156,6 +163,12 @@ Window {
 
                     rightX = dx / maxRadius
                     rightY = dy / maxRadius
+                    if(Math.abs(rightX) < 0.1){
+                        rightX = 0
+                    }
+                    if(Math.abs(rightY) < 0.1){
+                        rightY = 0
+                    }
 
                 } else {
                     rightKnob.x = rightJoystick.width / 2 - rightKnob.width / 2
