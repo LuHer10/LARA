@@ -11,7 +11,7 @@
 #define GRIPPER_OPEN  3.0f*M_PI/4.0f
 #define GRIPPER_CLOSE M_PI/2.0f
 
-#define MARGIN 0.01f
+#define MARGIN 0.02f
 
 class Arm
 {
