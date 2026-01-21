@@ -79,14 +79,17 @@ int main() {
             
         }
 
-        arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
+        if(y_left || y_right)
+        {
+            arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
+        }
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
-        printf("%f, %f, %f  ", arm_x, arm_y, arm_th);
+        printf("%f, %f, %f  \n", arm_x, arm_y, arm_th);
 
         //printf("%f, %f, %f, %f, %d", x_left, y_left, x_right, y_right, grip);
 
-        usleep(1000);  // 10 Hz loop
+        usleep(100);  // 10 Hz loop
     
     }
     return 0;
