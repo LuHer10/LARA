@@ -8,6 +8,11 @@
 #define q2_2_m2 2.0f
 #define q3_2_m3 2.0f
 
+#define M1_ID 11
+#define M2_ID 30
+#define M3_ID 40
+#define GRIP_ID 50
+
 #define GRIPPER_OPEN  3.0f*M_PI/4.0f
 #define GRIPPER_CLOSE M_PI/2.0f
 
@@ -35,10 +40,10 @@ public:
     Arm(float l_1, float l_2, float l_3)
     {
         servos.init();
-        servos.enableTorque(10);
-        servos.enableTorque(20);
-        servos.enableTorque(30);
-        servos.enableTorque(40);
+        servos.enableTorque(M1_ID);
+        servos.enableTorque(M2_ID);
+        servos.enableTorque(M3_ID);
+        servos.enableTorque(GRIP_ID);
 
         l1 = l_1;
         l2 = l_2;
@@ -52,9 +57,9 @@ public:
 
         theta = 0.0f;
 
-        servos.writePos(11, radToPos(m1));
-        servos.writePos(30, radToPos(m2));
-        servos.writePos(40, radToPos(m3));
+        servos.writePos(M1_ID, radToPos(m1));
+        servos.writePos(M2_ID, radToPos(m2));
+        servos.writePos(M3_ID, radToPos(m3));
 
         DK(q1, q2, q3);
     }
@@ -99,8 +104,8 @@ public:
 
     int test_qs(float q_1, float q_2, float q_3);
 
-    void open();
-    void close();
+    void open(){servos.writePos(GRIP_ID, degToPos(135));}
+    void close(){servos.writePos(GRIP_ID, degToPos(90));}
 
 
 };
