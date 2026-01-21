@@ -1,3 +1,12 @@
+/*
+
+Motor with ID 10 on the base left  side (M1)
+Motor with ID 20 on the base right side (M1)
+Motor with ID 30 on the arm  left  side (M3)
+Motor with ID 40 on the arm  right side (M2)
+
+*/
+
 #ifndef ARM_H
 #define ARM_H
 #include <cmath>
@@ -9,8 +18,8 @@
 #define q3_2_m3 2.0f
 
 #define M1_ID 11
-#define M2_ID 30
-#define M3_ID 40
+#define M2_ID 40
+#define M3_ID 30
 #define GRIP_ID 50
 
 #define GRIPPER_OPEN  3.0f*M_PI/4.0f
@@ -40,6 +49,11 @@ public:
     Arm(float l_1, float l_2, float l_3)
     {
         servos.init();
+
+        servos.extPosContMode(M1_ID);
+        servos.extPosContMode(M2_ID);
+        servos.extPosContMode(M3_ID);
+
         servos.enableTorque(M1_ID);
         servos.enableTorque(M2_ID);
         servos.enableTorque(M3_ID);
@@ -66,10 +80,10 @@ public:
 
     ~Arm()
     {
-        servos.disableTorque(10);
-        servos.disableTorque(20);
-        servos.disableTorque(30);
-        servos.disableTorque(40);
+        servos.disableTorque(M1_ID);
+        servos.disableTorque(M2_ID);
+        servos.disableTorque(M3_ID);
+        servos.disableTorque(GRIP_ID);
     }
 
     void setP(float p_x, float p_y)
