@@ -17,6 +17,10 @@ Motor with ID 40 on the arm  right side (M2)
 #define q2_2_m2 2.0f
 #define q3_2_m3 2.0f
 
+#define m1_2_q1 1.0f/q1_2_m1
+#define m2_2_q2 2.0f/q2_2_m2
+#define m3_2_q3 2.0f/q3_2_m3
+
 #define M1_ID 11
 #define M2_ID 40
 #define M3_ID 30
@@ -38,11 +42,17 @@ private:
     float theta;
     float px, py;
     float wx, wy;
+
+    float offset1 = 0;
+    float offset2 = 0;
+    float offset3 = 0;
     
     float m1, m2, m3;
 
     int DK(float q_1, float q_2, float q_3);
     int IK(float p_x, float p_y, float th);
+
+    void writePos(float m_1, float m_2, float m_3);
 
 public:
 
@@ -71,9 +81,7 @@ public:
 
         theta = 0.0f;
 
-        servos.writePos(M1_ID, radToPos(m1));
-        servos.writePos(M2_ID, radToPos(m2));
-        servos.writePos(M3_ID, radToPos(m3));
+        writePos(m1, m2, m3);
 
         DK(q1, q2, q3);
     }
@@ -108,15 +116,21 @@ public:
     int moveIncr(float dx, float dy, float dth);
 
     int move_qs(float q_1, float q_2, float q_3);
-    int setOffset(float off1, float off2, float off3);
+    int moveIncr_ms(float dq1, float dq2, float dq3);
+    
+    void move_q1(float q_1){
+        servos.writePos(M1_ID, radToPos(q_1*q1_2_m1));
+    }
+
+    int setOffset();
 
     void home();
     
     void q2m(float q_1, float q_2, float q_3, float &m_1, float &m_2, float &m_3)
     {
-        m_1 = q_1 * q1_2_m1;
-        m_2 = q_2 * q2_2_m2;
-        m_3 = q_3 * q3_2_m3;
+        m_1 = (q_1 + offset1) * q1_2_m1;
+        m_2 = (q_2 + offset2) * q2_2_m2;
+        m_3 = (q_3 + offset3) * q3_2_m3;
     }
 
     int test_qs(float q_1, float q_2, float q_3);

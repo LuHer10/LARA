@@ -83,9 +83,7 @@ int Arm::move(float p_x, float p_y, float th)
     err = IK(p_x, p_y, th);
     //if(err == -1) return -1;
 
-    servos.writePos(11, radToPos(m1));
-    servos.writePos(30, radToPos(m2));
-    servos.writePos(40, radToPos(m3));
+    writePos(m1, m2, m3);
     return 0;
 }
 
@@ -98,10 +96,15 @@ int Arm::moveIncr(float dx, float dy, float dth)
     err = IK(p_x, p_y, th);
     //if(err == -1) return -1;
 
-    servos.writePos(11, radToPos(m1));
-    servos.writePos(30, radToPos(m2));
-    servos.writePos(40, radToPos(m3));
+    writePos(m1, m2, m3);
     return 0;
+}
+
+void Arm::writePos(float m_1, float m_2, float m_3)
+{
+    servos.writePos(M1_ID, radToPos(m1));
+    servos.writePos(M2_ID, radToPos(m2));
+    servos.writePos(M3_ID, radToPos(m3));
 }
 
 void Arm::home()
@@ -114,9 +117,7 @@ void Arm::home()
 
     q2m(q1, q2, q3, m1, m2, m3);
 
-    servos.writePos(11, radToPos(m1));
-    servos.writePos(30, radToPos(m2));
-    servos.writePos(40, radToPos(m3));
+    writePos(m1, m2, m3);
 }
 
 int Arm::test_qs(float q_1, float q_2, float q_3)
@@ -131,3 +132,35 @@ int Arm::test_qs(float q_1, float q_2, float q_3)
     return 0;
 }
 
+
+int Arm::move_qs(float q_1, float q_2, float q_3)
+{
+    //q1 = q_1;
+    //q2 = q_1;
+    //q3 = q_1;
+
+    q2m(q_1, q_2, q_3, m1, m2, m3);
+
+    writePos(m1, m2, m3);
+    return 0;
+}
+
+int Arm::moveIncr_ms(float dq1, float dq2, float dq3)
+{
+    m1 += dq1*q1_2_m1;
+    m2 += dq2*q2_2_m2;
+    m3 += dq3*q3_2_m3;
+    
+    //q2m(q1, q2, q3, m1, m2, m3);
+
+    writePos(m1, m2, m3);
+    return 0;
+}
+
+int Arm::setOffset()
+{
+    offset1 = m1*m1_2_q1 - 180.0f;
+    offset2 = m2*m2_2_q2 - 180.0f;
+    offset3 = m3*m3_2_q3 - 180.0f;
+    
+}

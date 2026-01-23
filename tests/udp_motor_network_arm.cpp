@@ -24,6 +24,7 @@ int main() {
     int8_t mode;
 
     int manual = 0;
+    int pre_manual = manual;
 
     float q2off = 0;
     float q3off = 0;
@@ -52,6 +53,8 @@ int main() {
         pre_y_right = y_right;
 
         net.receiveJoysticks(x_left, y_left, x_right, y_right, mode);
+
+        pre_manual = manual;
 
         manual = mode >> 2;
 
@@ -90,8 +93,18 @@ int main() {
         {
             if(manual == 0)
                 arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
-
+            if(manual == 1)
+            {
+                arm.move_q1(PI/2.0f);
+                arm.moveIncr_ms(0.0f, y_left, y_right);
+            }
             
+        }
+
+        if(pre_manual != manual && !manual)
+        {
+            arm.setOffset();
+            arm.move_qs(PI/2.0f, PI, PI);
         }
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
