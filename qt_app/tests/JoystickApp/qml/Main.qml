@@ -16,6 +16,7 @@ Window {
     property real rightY: 0
     property int gripEnabled: 0
     property int gripDown: 0
+    property int manualOn: 0
 
 
     Timer {
@@ -24,7 +25,7 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, gripDown << 1 | gripEnabled)
+            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, manualOn << 2 | gripDown << 1 | gripEnabled)
         }
     }
 
@@ -220,6 +221,23 @@ Window {
 
         onCheckedChanged: {
             gripDown = checked
+        }
+    }
+
+    Button {
+        id: manualButton
+        width: 100
+        height: 50
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+
+        checkable: true
+        text: checked ? "Automatic" : "Manual"
+
+        onCheckedChanged: {
+            manualOn = checked
         }
     }
 
