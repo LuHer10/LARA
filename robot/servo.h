@@ -71,6 +71,8 @@ public:
     void disableTorque(int id);
     void writePos(int id, int32_t pos);
     int32_t readPos(int id);
+    void setOffset(int id, int32_t off);
+    int32_t getOffset(int id);
 
     
 };

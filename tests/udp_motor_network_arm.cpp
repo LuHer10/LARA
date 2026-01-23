@@ -21,7 +21,12 @@ int main() {
     float q1, q2, q3;
     float arm_x, arm_y, arm_th;
 
-    int8_t grip;
+    int8_t mode;
+
+    int manual = 0;
+
+    float q2off = 0;
+    float q3off = 0;
 
     float pre_x_left, pre_y_left;
     float pre_x_right, pre_y_right;
@@ -46,7 +51,9 @@ int main() {
         pre_x_right = x_right;
         pre_y_right = y_right;
 
-        net.receiveJoysticks(x_left, y_left, x_right, y_right, grip);
+        net.receiveJoysticks(x_left, y_left, x_right, y_right, mode);
+
+        manual = mode >> 2;
 
         base.readEncoders();
 
@@ -81,7 +88,10 @@ int main() {
 
         if(y_left || y_right)
         {
-            arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
+            if(manual == 0)
+                arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
+
+            
         }
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);

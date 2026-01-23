@@ -107,6 +107,9 @@ public:
     int move(float p_x, float p_y, float th);
     int moveIncr(float dx, float dy, float dth);
 
+    int move_qs(float q_1, float q_2, float q_3);
+    int setOffset(float off1, float off2, float off3);
+
     void home();
     
     void q2m(float q_1, float q_2, float q_3, float &m_1, float &m_2, float &m_3)
