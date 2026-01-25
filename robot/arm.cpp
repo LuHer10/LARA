@@ -73,6 +73,7 @@ int Arm::IK(float p_x, float p_y, float th, float &q_1, float &q_2, float &q_3)
     q_3 = M_PI - alpha + theta;
 
     int err = 0; //test_qs(q_1, q_2, q_3);
+    if(std::isnan(q_1) || std::isnan(q_2) || std::isnan(q_3)) return -1;
     return err;
 
 }
@@ -94,7 +95,7 @@ int Arm::moveIncr(float dx, float dy, float dth)
     float p_y = py + dy;
     float th = theta + dth;
     err = IK(p_x, p_y, th);
-    //if(err == -1) return -1;
+    if(err == -1) return -1;
 
     writePos(m1, m2, m3);
     return 0;
