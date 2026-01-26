@@ -52,12 +52,12 @@ int main() {
 
         if(changed)
         {
-            base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
+            base.setVelocity(x_left*10.0f, y_left*10.0f, -x_right*10.0f);
             base.sendSpeed();
         }
 
         usleep(10000);  // 10 Hz loop
-        printf("%f, %f, %f, %f, %d\n", x_left, y_left, x_right, y_right, grip);
+        //printf("%f, %f, %f, %f, %d\n", x_left, y_left, x_right, y_right, grip);
     }
 
     return 0;

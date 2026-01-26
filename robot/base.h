@@ -11,15 +11,15 @@
 #define WHEEL_DIAMETER 0.06F // Wheel diameter in meters
 constexpr float WHEEL_RADIUS = WHEEL_DIAMETER/2.0F;
 #define MAX_RPM 330 
-#define LENGTH 0.32F
-#define WIDTH 0.29F
+#define LENGTH 0.323F
+#define WIDTH 0.3F
 #define PI 3.14159F
 
 constexpr float LX = LENGTH/2.0F;
 constexpr float LY = WIDTH/2.0F;
 constexpr float LXY = LX+LY;
 
-constexpr float QPPR_2_RAD = PI*WHEEL_DIAMETER/(QPPR);
+constexpr float QPPR_2_RAD = PI*2.0f/(QPPR);//PI*WHEEL_DIAMETER/(QPPR);
 constexpr float RAD_2_QPPR = 1.0F/(QPPR_2_RAD);
 
 struct Odometry
