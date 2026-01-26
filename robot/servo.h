@@ -44,6 +44,12 @@ inline int32_t radToPos(float rad)
     return out;
 }
 
+inline float posToDeg(int32_t pos)
+{
+    float ang = ((float)pos/(float)MAXIMUM_POSITION_LIMIT)*360.0f;
+    return ang;
+}
+
 class Servo
 {
 private:
