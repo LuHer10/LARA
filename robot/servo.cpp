@@ -146,3 +146,26 @@ int32_t Servo::readPos(int id)
     return currPos[id];
 }
 
+void Servo::setMaxVel(int id, int32_t data)
+{
+    dxl_comm_result = packetHandler->write4ByteTxRx(portHandler, id, 
+        ADDR_PROFILE_VELOCITY, data, &dxl_error);
+    if (dxl_comm_result != COMM_SUCCESS) {
+      printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+    }
+    else if (dxl_error != 0) {
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
+    }
+}
+
+void Servo::setMaxAcc(int id, int32_t data)
+{
+    dxl_comm_result = packetHandler->write4ByteTxRx(portHandler, id, 
+        ADDR_PROFILE_ACCELERATION, data, &dxl_error);
+    if (dxl_comm_result != COMM_SUCCESS) {
+      printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+    }
+    else if (dxl_error != 0) {
+      printf("%s\n", packetHandler->getRxPacketError(dxl_error));
+    }
+}

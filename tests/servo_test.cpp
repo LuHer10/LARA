@@ -24,16 +24,21 @@ int main()
     servos.enableTorque(50);
 
     //servos.writePos(11, degToPos(90));
-    servos.writePos(40, 3500); //6700
-    servos.writePos(30, -500); //1655 -200
+    //servos.writePos(40, 3500); //6700
+    //servos.writePos(30, -500); //1655 -200
     
     
     //servos.writePos(50, degToPos(90));
 
     //sleep(2);
 
-    servos.writePos(50, degToPos(135));
-    sleep(2);
+    servos.writePos(11, degToPos(90));
+    servos.writePos(40, degToPos(60));
+    servos.writePos(30, degToPos(90));
+
+
+
+    sleep(20);
 
 
     //servos.disableTorque(11);

@@ -104,8 +104,8 @@ int Arm::moveIncr(float dx, float dy, float dth)
 void Arm::writePos(float m_1, float m_2, float m_3)
 {
     servos.writePos(M1_ID, radToPos(m1));
-    servos.writePos(M2_ID, radToPos(m2));
-    servos.writePos(M3_ID, radToPos(m3));
+    //servos.writePos(M2_ID, radToPos(m2));
+    //servos.writePos(M3_ID, radToPos(m3));
 }
 
 void Arm::home()
@@ -163,5 +163,6 @@ int Arm::setOffset()
     offset1 = m1*m1_2_q1 - 180.0f;
     offset2 = m2*m2_2_q2 - 180.0f;
     offset3 = m3*m3_2_q3 - 180.0f;
-    
+
+    return 0;
 }

@@ -38,7 +38,7 @@ int main() {
 
     Base base;
 
-    Arm arm(0.4f, 0.4f, 0.1f);
+    Arm arm(0.4f, 0.4f, L_GRIPPER);
     arm.get_qs(q1, q2, q3);
     arm.get_pos(arm_x, arm_y, arm_th);
     
@@ -77,8 +77,8 @@ int main() {
         {
             //if(arm_x > 0.7f || arm_x < 0.3f)
             //{
-                base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
-                base.sendSpeed();
+                //base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
+                //base.sendSpeed();
                 //arm.moveIncr(0.0f, y_right*0.1f, 0.0f);
             //}
             //else
@@ -89,23 +89,25 @@ int main() {
             
         }
 
-        if(y_left || y_right)
+        if(x_right || y_right)
         {
             if(manual == 0)
-                arm.moveIncr(y_left*0.01f, -y_right*0.01f, 0.0f);
+                arm.moveIncr(x_right*0.005f, y_right*0.005f, 0.0f);
             if(manual == 1)
             {
                 arm.move_q1(PI/2.0f);
-                arm.moveIncr_ms(0.0f, y_left, y_right);
+                arm.moveIncr_ms(0.0f, x_left, y_right);
             }
             
         }
 
+        /*
         if(pre_manual != manual && !manual)
         {
             arm.setOffset();
             arm.move_qs(PI/2.0f, PI, PI);
         }
+        */
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
         printf("%f, %f, %f  \n", arm_x, arm_y, arm_th);

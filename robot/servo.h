@@ -22,6 +22,9 @@
 #define POSITION_CONTROL 3
 #define EXTENDED_POSITION_CONTROL 4
 
+#define ADDR_PROFILE_VELOCITY 112
+#define ADDR_PROFILE_ACCELERATION 108
+
 
 #define PROTOCOL_VERSION  2.0
 
@@ -48,6 +51,12 @@ inline float posToDeg(int32_t pos)
 {
     float ang = ((float)pos * 360.0f)/((float)MAXIMUM_POSITION_LIMIT);
     return ang;
+}
+
+inline float posToRad(int32_t pos)
+{
+    float rad = ((float)pos * (2.0f*M_PI))/((float)MAXIMUM_POSITION_LIMIT);
+    return rad;
 }
 
 class Servo
@@ -80,7 +89,9 @@ public:
     void setOffset(int id, int32_t off);
     int32_t getOffset(int id);
 
-    
+    void setMaxVel(int id, int32_t data);
+    void setMaxAcc(int id, int32_t data);
+
 };
 
 #endif

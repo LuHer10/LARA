@@ -18,8 +18,8 @@ Motor with ID 40 on the arm  right side (M2)
 #define q3_2_m3 2.0f
 
 #define m1_2_q1 1.0f/q1_2_m1
-#define m2_2_q2 2.0f/q2_2_m2
-#define m3_2_q3 2.0f/q3_2_m3
+#define m2_2_q2 1.0f/q2_2_m2
+#define m3_2_q3 1.0f/q3_2_m3
 
 #define M1_ID 11
 #define M2_ID 40
@@ -30,6 +30,11 @@ Motor with ID 40 on the arm  right side (M2)
 #define GRIPPER_CLOSE M_PI/2.0f
 
 #define MARGIN 0.02f
+
+#define L_GRIPPER 0.215f 
+
+#define MAX_VEL 10
+#define MAX_ACC 5
 
 class Arm
 {
@@ -64,6 +69,15 @@ public:
         servos.extPosContMode(M2_ID);
         servos.extPosContMode(M3_ID);
 
+        servos.setMaxVel(M1_ID, MAX_VEL);
+        servos.setMaxVel(M2_ID, MAX_VEL);
+        servos.setMaxVel(M3_ID, MAX_VEL);
+
+        servos.setMaxAcc(M1_ID, MAX_ACC);
+        servos.setMaxAcc(M2_ID, MAX_ACC);
+        servos.setMaxAcc(M3_ID, MAX_ACC);
+
+
         servos.enableTorque(M1_ID);
         servos.enableTorque(M2_ID);
         servos.enableTorque(M3_ID);
@@ -73,25 +87,36 @@ public:
         l2 = l_2;
         l3 = l_3;
 
+        /**/
         q1 = M_PI/2.0f;
         q2 = M_PI/2.0f;
         q3 = M_PI/2.0f;
 
-        q2m(q1, q2, q3, m1, m2, m3);
+        m1 = posToRad(servos.readPos(10));
+        //m1 = posToRad(servos.readPos(20));
+        m2 = posToRad(servos.readPos(M2_ID));
+        m3 = posToRad(servos.readPos(M3_ID));
+
+        printf("%f, %f, %f  \n", m1, m2, m3);
+
+        m2q(m1, m2, m3, q1, q2, q3);
+
+
+        //q2m(q1, q2, q3, m1, m2, m3);
 
         theta = 0.0f;
 
-        writePos(m1, m2, m3);
+        //writePos(m1, m2, m3);
 
         DK(q1, q2, q3);
     }
 
     ~Arm()
     {
-        servos.disableTorque(M1_ID);
-        servos.disableTorque(M2_ID);
-        servos.disableTorque(M3_ID);
-        servos.disableTorque(GRIP_ID);
+        //servos.disableTorque(M1_ID);
+        //servos.disableTorque(M2_ID);
+        //servos.disableTorque(M3_ID);
+        //servos.disableTorque(GRIP_ID);
     }
 
     void setP(float p_x, float p_y)
@@ -133,10 +158,20 @@ public:
         m_3 = (q_3 + offset3) * q3_2_m3;
     }
 
+    void m2q(float m_1, float m_2, float m_3, float &q_1, float &q_2, float &q_3)
+    {
+        q_1 = m_1 * m1_2_q1 - offset1;
+        q_2 = m_2 * m2_2_q2 - offset2;
+        q_3 = m_3 * m3_2_q3 - offset3;
+
+    }
+
     int test_qs(float q_1, float q_2, float q_3);
 
     void open(){servos.writePos(GRIP_ID, degToPos(135));}
     void close(){servos.writePos(GRIP_ID, degToPos(90));}
+
+    
 
 
 };
