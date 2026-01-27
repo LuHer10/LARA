@@ -37,7 +37,7 @@ int main() {
         return 1;
     }
 
-    fprintf(file, "Time; X; Y; Angle; VX; VY\n");
+    fprintf(file, "Test2\nTime; X; Y; Angle; VX; VY\n");
     fflush(file);
 
     struct timeval last, now, moveLast;
@@ -51,6 +51,7 @@ int main() {
 
     while (1) {
         gettimeofday(&now, NULL);
+        odo = base.getOdometry();
 
         if (time_diff_us(now, last) >= INTERVAL_US) {
             odo = base.getOdometry();
@@ -65,30 +66,14 @@ int main() {
 
         }
 
-        if(time_diff_us(now, moveLast) >= DIR_CHANGE_US)
-        {
-            base.setVelocity(0.0f, 10.0f, 0.0f);
-            base.sendSpeed();
-        }
-
-        if(time_diff_us(now, moveLast) >= DIR_CHANGE_US*2)
-        {
-            base.setVelocity(-10.0f, 0.0f, 0.0f);
-            base.sendSpeed();
-        }
-
-        if(time_diff_us(now, moveLast) >= DIR_CHANGE_US*3)
-        {
-            base.setVelocity(0.0f, -10.0f, 0.0f);
-            base.sendSpeed();
-        }
-
-        if(time_diff_us(now, moveLast) >= DIR_CHANGE_US*4)
+        if(odo.x >= 5.0f)
         {
             base.setVelocity(0.0f, 0.0f, 0.0f);
             base.sendSpeed();
             break;
         }
+
+        
 
     }
 
