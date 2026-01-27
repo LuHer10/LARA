@@ -15,12 +15,14 @@ long time_diff_us(struct timeval a, struct timeval b) {
            (a.tv_usec - b.tv_usec);
 }
 
+Odometry odo;
+
 int main() {
     
     //RoboClaw rcl(SERIAL_PORT, BAUD_RATE);
     Base base;
 
-    Odometry odo;
+    
     
     base.readEncoders();
     odo = base.getOdometry();
@@ -40,22 +42,32 @@ int main() {
     fprintf(file, "Test2\nTime; X; Y; Angle; VX; VY\n");
     fflush(file);
 
-    struct timeval last, now, moveLast;
+    struct timeval last, now, moveLast, beg;
     gettimeofday(&last, NULL);
     gettimeofday(&moveLast, NULL);
+    
 
     int count = 0;
 
-    base.setVelocity(10.0f, 0.0f, 0.0f);
-    base.sendSpeed();
+    
+    gettimeofday(&beg, NULL);
+    base.readEncoders();
+    odo = base.getOdometry();
+    fprintf(file, "%d; %f; %f; %f; %f; %f\n", ((now.tv_sec-beg.tv_sec) * 1000000L + (now.tv_usec-beg.tv_usec))/1000L, 
+        odo.x, odo.y, odo.ang, odo.x-pre_x, odo.y-pre_y);
+    fflush(file);
 
+    base.setVelocity(0.0f, -5.0f, 0.0f);
+    base.sendSpeed();
     while (1) {
         gettimeofday(&now, NULL);
+        base.readEncoders();
         odo = base.getOdometry();
 
         if (time_diff_us(now, last) >= INTERVAL_US) {
+            base.readEncoders();
             odo = base.getOdometry();
-            fprintf(file, "%d; %f; %f; %f; %f; %f\n", now.tv_sec * 1000000L + now.tv_usec, 
+            fprintf(file, "%d; %f; %f; %f; %f; %f\n", ((now.tv_sec-beg.tv_sec) * 1000000L + (now.tv_usec-beg.tv_usec))/1000L, 
                 odo.x, odo.y, odo.ang, odo.x-pre_x, odo.y-pre_y);
             fflush(file);
 
@@ -66,14 +78,15 @@ int main() {
 
         }
 
-        if(odo.x >= 5.0f)
+        if(odo.y <= -2.0f)
         {
             base.setVelocity(0.0f, 0.0f, 0.0f);
             base.sendSpeed();
             break;
         }
 
-        
+        std::cout << "x: " << odo.x
+        << " , y: " << odo.y << " , ang: " << odo.ang << "\n";
 
     }
 

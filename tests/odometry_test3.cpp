@@ -40,22 +40,32 @@ int main() {
     fprintf(file, "Test3\nTime; X; Y; Angle; VX; VY\n");
     fflush(file);
 
-    struct timeval last, now, moveLast;
+    struct timeval last, now, moveLast, beg;
     gettimeofday(&last, NULL);
     gettimeofday(&moveLast, NULL);
 
     int count = 0;
 
-    base.setVelocity(0.0f, 10.0f, 0.0f);
-    base.sendSpeed();
+    
 
+    gettimeofday(&beg, NULL);
+    base.readEncoders();
+    odo = base.getOdometry();
+    fprintf(file, "%d; %f; %f; %f; %f; %f\n", ((now.tv_sec-beg.tv_sec) * 1000000L + (now.tv_usec-beg.tv_usec))/1000L, 
+        odo.x, odo.y, odo.ang, odo.x-pre_x, odo.y-pre_y);
+    fflush(file);
+
+    base.setVelocity(-5.0f, 0.0f, 0.0f);
+    base.sendSpeed();
     while (1) {
         gettimeofday(&now, NULL);
+        base.readEncoders();
         odo = base.getOdometry();
 
         if (time_diff_us(now, last) >= INTERVAL_US) {
+            base.readEncoders();
             odo = base.getOdometry();
-            fprintf(file, "%d; %f; %f; %f; %f; %f\n", now.tv_sec * 1000000L + now.tv_usec, 
+            fprintf(file, "%d; %f; %f; %f; %f; %f\n", ((now.tv_sec-beg.tv_sec) * 1000000L + (now.tv_usec-beg.tv_usec))/1000L, 
                 odo.x, odo.y, odo.ang, odo.x-pre_x, odo.y-pre_y);
             fflush(file);
 
@@ -66,7 +76,7 @@ int main() {
 
         }
 
-        if(odo.y >= 5.0f)
+        if(odo.x <= -2.0f)
         {
             base.setVelocity(0.0f, 0.0f, 0.0f);
             base.sendSpeed();
