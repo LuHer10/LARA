@@ -32,7 +32,7 @@ int main()
 
     sleep(2);
 
-    servos.writePos(50, degToPos(135));
+    //servos.writePos(50, degToPos(135));
     
     sleep(2);
 
