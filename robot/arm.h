@@ -33,7 +33,7 @@ Motor with ID 40 on the arm  right side (M2)
 
 #define L_GRIPPER 0.215f 
 
-#define MAX_VEL 10
+#define MAX_VEL 4
 #define MAX_ACC 5
 
 class Arm
@@ -69,7 +69,7 @@ public:
         servos.extPosContMode(M2_ID);
         servos.extPosContMode(M3_ID);
 
-        servos.setMaxVel(M1_ID, MAX_VEL);
+        servos.setMaxVel(M1_ID, 2);
         servos.setMaxVel(M2_ID, MAX_VEL);
         servos.setMaxVel(M3_ID, MAX_VEL);
 
@@ -92,7 +92,7 @@ public:
         q2 = M_PI/2.0f;
         q3 = M_PI/2.0f;
 
-        m1 = posToRad(servos.readPos(10));
+        m1 = q1; //posToRad(servos.readPos(10));
         //m1 = posToRad(servos.readPos(20));
         m2 = posToRad(servos.readPos(M2_ID));
         m3 = posToRad(servos.readPos(M3_ID));
@@ -106,6 +106,7 @@ public:
 
         theta = 0.0f;
 
+        servos.writePos(M1_ID, radToPos(m1));
         //writePos(m1, m2, m3);
 
         DK(q1, q2, q3);

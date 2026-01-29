@@ -98,14 +98,17 @@ int Arm::moveIncr(float dx, float dy, float dth)
     if(err == -1) return -1;
 
     writePos(m1, m2, m3);
+
+    std::cout << "px: " << p_x << " py: " << p_y << " th: " << th << "\n";
+
     return 0;
 }
 
 void Arm::writePos(float m_1, float m_2, float m_3)
 {
     servos.writePos(M1_ID, radToPos(m1));
-    //servos.writePos(M2_ID, radToPos(m2));
-    //servos.writePos(M3_ID, radToPos(m3));
+    servos.writePos(M2_ID, radToPos(m2));
+    servos.writePos(M3_ID, radToPos(m3));
 }
 
 void Arm::home()
