@@ -22,6 +22,7 @@ int main() {
     float arm_x, arm_y, arm_th;
 
     int8_t mode;
+    int8_t grip = 0;
 
     int manual = 0;
     int pre_manual = manual;
@@ -44,6 +45,8 @@ int main() {
     
     base.readEncoders();
     odo = base.getOdometry();
+
+    arm.open();
 
     while (1) {
 
@@ -77,8 +80,8 @@ int main() {
         {
             //if(arm_x > 0.7f || arm_x < 0.3f)
             //{
-                //base.setVelocity(x_left*0.5f, y_left*0.5f, -x_right);
-                //base.sendSpeed();
+                base.setVelocity(x_left*5.0f, y_left*5.0f, 0/*-x_right*/);
+                base.sendSpeed();
                 //arm.moveIncr(0.0f, y_right*0.1f, 0.0f);
             //}
             //else
@@ -92,13 +95,24 @@ int main() {
         if(x_right || y_right)
         {
             if(manual == 0)
-                arm.moveIncr(x_right*0.0001f, y_right*0.0001f, 0.0f);
+                arm.moveIncr(x_right*0.005f, y_right*0.005f, 0.0f);
             if(manual == 1)
             {
                 arm.move_q1(PI/2.0f);
                 arm.moveIncr_ms(0.0f, x_left, y_right);
             }
             
+        }
+
+        grip = mode & 0x01;
+
+        if(mode & 0x01)
+        {
+            arm.close();
+        }
+        else
+        {
+            arm.open();
         }
 
         /*
@@ -110,7 +124,7 @@ int main() {
         */
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
-        printf("%f, %f, %f  \n", arm_x, arm_y, arm_th);
+        printf("%f, %f, %f, %d  \n", arm_x, arm_y, arm_th, mode);
 
         //printf("%f, %f, %f, %f, %d", x_left, y_left, x_right, y_right, grip);
 

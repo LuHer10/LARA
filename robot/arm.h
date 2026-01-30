@@ -36,7 +36,7 @@ constexpr float m3_2_q3 = 1.0f/q3_2_m3;
 
 #define L_GRIPPER 0.215f 
 
-#define MAX_VEL 4
+#define MAX_VEL 10
 #define MAX_ACC 5
 
 class Arm
@@ -72,7 +72,7 @@ public:
         servos.extPosContMode(M2_ID);
         servos.extPosContMode(M3_ID);
 
-        servos.setMaxVel(M1_ID, 2);
+        servos.setMaxVel(M1_ID, 5);
         servos.setMaxVel(M2_ID, MAX_VEL);
         servos.setMaxVel(M3_ID, MAX_VEL);
 
