@@ -92,7 +92,7 @@ int main() {
         if(x_right || y_right)
         {
             if(manual == 0)
-                arm.moveIncr(x_right*0.005f, y_right*0.005f, 0.0f);
+                arm.moveIncr(x_right*0.0001f, y_right*0.0001f, 0.0f);
             if(manual == 1)
             {
                 arm.move_q1(PI/2.0f);
@@ -114,7 +114,7 @@ int main() {
 
         //printf("%f, %f, %f, %f, %d", x_left, y_left, x_right, y_right, grip);
 
-        usleep(100);  // 10 Hz loop
+        usleep(1000);  // 10 Hz loop
     
     }
     return 0;

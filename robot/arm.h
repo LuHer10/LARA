@@ -13,13 +13,16 @@ Motor with ID 40 on the arm  right side (M2)
 #include "servo.h"
 #include <iostream>
 
-#define q1_2_m1 1.0f
-#define q2_2_m2 2.0f
-#define q3_2_m3 2.0f
+constexpr float q1_2_m1 = 1.0f;
+//#define q2_2_m2 2.0f
+//#define q3_2_m3 2.0f
 
-#define m1_2_q1 1.0f/q1_2_m1
-#define m2_2_q2 1.0f/q2_2_m2
-#define m3_2_q3 1.0f/q3_2_m3
+constexpr float q2_2_m2 = 48.0f/20.0f;
+constexpr float q3_2_m3 = 48.0f/20.0f;
+
+constexpr float m1_2_q1 = 1.0f/q1_2_m1;
+constexpr float m2_2_q2 = 1.0f/q2_2_m2;
+constexpr float m3_2_q3 = 1.0f/q3_2_m3;
 
 #define M1_ID 11
 #define M2_ID 40
@@ -100,6 +103,8 @@ public:
         printf("%f, %f, %f  \n", m1, m2, m3);
 
         m2q(m1, m2, m3, q1, q2, q3);
+
+        printf("%f, %f, %f  \n", q1, q2, q3);
 
 
         //q2m(q1, q2, q3, m1, m2, m3);
