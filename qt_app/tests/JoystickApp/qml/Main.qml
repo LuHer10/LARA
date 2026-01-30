@@ -25,7 +25,7 @@ Window {
         repeat: true
         running: true
         onTriggered: {
-            udpHandler.sendJoystickData(leftX, -leftY, rightX, rightY, manualOn << 2 | gripDown << 1 | gripEnabled)
+            udpHandler.sendJoystickData(leftX, -leftY, rightX, -rightY, manualOn << 2 | gripDown << 1 | gripEnabled)
         }
     }
 
