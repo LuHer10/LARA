@@ -4867,7 +4867,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 192.278 52.07 90)
 			(effects
 				(font
@@ -4937,7 +4937,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 234.6452 43.18 0)
 			(effects
 				(font
@@ -5429,7 +5429,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 50.8 147.6248 0)
 			(effects
 				(font
@@ -6149,7 +6149,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 155.702 52.07 90)
 			(effects
 				(font
@@ -6349,7 +6349,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 50.8 159.0548 0)
 			(effects
 				(font
@@ -6749,7 +6749,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 109.982 156.21 90)
 			(effects
 				(font
@@ -7060,7 +7060,7 @@
 				)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "Buck 12V - 5V"
 			(at 80.01 27.94 0)
 			(effects
 				(font
@@ -7068,7 +7068,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "components:BUCK12-5"
 			(at 80.01 29.21 0)
 			(effects
 				(font
@@ -7395,7 +7395,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 155.702 74.93 90)
 			(effects
 				(font
