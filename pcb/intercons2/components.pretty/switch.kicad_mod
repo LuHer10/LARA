@@ -1,0 +1,137 @@
+(footprint "switch"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "1920bced-3f5a-4e38-ac06-40d2a47336fe")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "switch"
+		(at 0 4.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "dd50b5a9-af87-4ce0-9bc5-8fc9478b6aa5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f0f8be49-22e0-4fab-84b8-c00a7568ed32")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "632ca58f-9efa-4ee6-bc7b-474fa37aaf6d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -4.5 -2.5)
+		(end 4.5 -2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "ce3f8a99-54a6-4633-b8bf-660de69b760e")
+	)
+	(fp_line
+		(start -4.5 2.5)
+		(end -4.5 -2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "7063f608-f85d-44fb-b66b-dcdd20052c64")
+	)
+	(fp_line
+		(start 4.5 -2.5)
+		(end 4.5 2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "309487f9-48ab-4fcd-b96b-26742831e0bd")
+	)
+	(fp_line
+		(start 4.5 2.5)
+		(end -4.5 2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "21a5e5d2-d6fe-40f5-8130-4f930975bf44")
+	)
+	(fp_rect
+		(start -4.5 -2.5)
+		(end 4.5 2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "97ff2743-90c1-4079-8dc2-6776a7ab9e61")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 6 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "d6ec50dd-8cb5-4b3b-b50d-229abb5a096b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -2.5 0)
+		(size 1.905 1.905)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d7b9c5c5-c965-43fd-9176-fd9d62efc6d6")
+	)
+	(pad "2" thru_hole circle
+		(at 2.5 0)
+		(size 1.905 1.905)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "3a82f056-6660-493b-8534-9afa502ab334")
+	)
+	(embedded_fonts no)
+)
