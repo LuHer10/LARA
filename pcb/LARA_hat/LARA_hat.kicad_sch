@@ -7298,7 +7298,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "68"
+		(property "Value" "47"
 			(at 25.4 106.6799 0)
 			(effects
 				(font
@@ -9290,7 +9290,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "68"
+		(property "Value" "47"
 			(at 34.29 109.2199 0)
 			(effects
 				(font
@@ -9611,7 +9611,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "68"
+		(property "Value" "47"
 			(at 43.18 111.7599 0)
 			(effects
 				(font
