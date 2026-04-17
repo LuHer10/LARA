@@ -3,14 +3,14 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "9.0.6-9.0.6~ubuntu24.04.1"
+      "Version": "9.0.8"
     },
-    "CreationDate": "2025-11-27T19:55:15+01:00"
+    "CreationDate": "2026-04-17T12:29:07+02:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "intercons",
-      "GUID": "696e7465-7263-46f6-9e73-2e6b69636164",
+      "Name": "intercons2",
+      "GUID": "696e7465-7263-46f6-9e73-322e6b696361",
       "Revision": "rev?"
     },
     "Size": {
@@ -34,47 +34,47 @@
   ],
   "FilesAttributes": [
     {
-      "Path": "intercons-F_Cu.gbr",
+      "Path": "intercons2-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-B_Cu.gbr",
+      "Path": "intercons2-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-F_Silkscreen.gbr",
+      "Path": "intercons2-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-B_Silkscreen.gbr",
+      "Path": "intercons2-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-F_Mask.gbr",
+      "Path": "intercons2-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "intercons-B_Mask.gbr",
+      "Path": "intercons2-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "intercons-Edge_Cuts.gbr",
+      "Path": "intercons2-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-F_Fab.gbr",
+      "Path": "intercons2-F_Fab.gbr",
       "FileFunction": "AssemblyDrawing,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "intercons-B_Fab.gbr",
+      "Path": "intercons2-B_Fab.gbr",
       "FileFunction": "AssemblyDrawing,Bot",
       "FilePolarity": "Positive"
     }
