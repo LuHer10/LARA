@@ -56,6 +56,22 @@ int Servo::init(const char *devName)
     return 0;
 }
 
+void Servo::currContMode(int id)
+{
+    if(torque_enabled[id] == true) return;
+    dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, id, 
+        ADDR_OPERATING_MODE, CURRENT_CONTROL, &dxl_error);
+    if (dxl_comm_result != COMM_SUCCESS) {
+        printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+    }
+    else if (dxl_error != 0) {
+        printf("%s\n", packetHandler->getRxPacketError(dxl_error));
+    }
+    else {
+        printf("Succeeded enabling CURRENT CONTROL Mode.\n");
+    }
+}
+
 void Servo::posContMode(int id)
 {
     if(torque_enabled[id] == true) return;
@@ -85,6 +101,22 @@ void Servo::extPosContMode(int id)
     }
     else {
         printf("Succeeded enabling EXTENDED POSITION CONTROL Mode.\n");
+    }
+}
+
+void Servo::currPosContMode(int id)
+{
+    if(torque_enabled[id] == true) return;
+    dxl_comm_result = packetHandler->write1ByteTxRx(portHandler, id, 
+        ADDR_OPERATING_MODE, CURRENT_POSITION_CONTROL, &dxl_error);
+    if (dxl_comm_result != COMM_SUCCESS) {
+        printf("%s\n", packetHandler->getTxRxResult(dxl_comm_result));
+    }
+    else if (dxl_error != 0) {
+        printf("%s\n", packetHandler->getRxPacketError(dxl_error));
+    }
+    else {
+        printf("Succeeded enabling CURRENT POSITION CONTROL Mode.\n");
     }
 }
 

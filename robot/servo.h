@@ -12,6 +12,7 @@
 #include <dynamixel_sdk/dynamixel_sdk.h> // Uses DYNAMIXEL SDK library
 
 #define ADDR_TORQUE_ENABLE          64
+#define ADDR_GOAL_CURRENT           102
 #define ADDR_GOAL_POSITION          116
 #define ADDR_PRESENT_POSITION       132
 #define MINIMUM_POSITION_LIMIT      0  // Refer to the Minimum Position Limit of product eManual
@@ -19,8 +20,10 @@
 #define BAUDRATE                    57600
 
 #define ADDR_OPERATING_MODE 11
+#define CURRENT_CONTROL 0
 #define POSITION_CONTROL 3
 #define EXTENDED_POSITION_CONTROL 4
+#define CURRENT_POSITION_CONTROL 5 // Torque and Position control
 
 #define ADDR_PROFILE_VELOCITY 112
 #define ADDR_PROFILE_ACCELERATION 108
@@ -79,8 +82,10 @@ public:
     int init();
     int init(const char *devName);
 
+    void currContMode(int id);
     void posContMode(int id);
     void extPosContMode(int id);
+    void currPosContMode(int id);
 
     void enableTorque(int id);
     void disableTorque(int id);
