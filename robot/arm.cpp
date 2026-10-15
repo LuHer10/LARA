@@ -113,9 +113,9 @@ void Arm::writePos(float m_1, float m_2, float m_3)
 
 void Arm::home()
 {
-    q1 = M_PI/2.0f;
-    q2 = M_PI/2.0f;
-    q3 = M_PI/2.0f;
+    q1 = 180.0f*M_PI/180.0f;
+    q2 = 27.0f*M_PI/180.0f;
+    q3 = 180.0f*M_PI/180.0f;
 
     DK(q1, q2, q3);
 
@@ -155,7 +155,7 @@ int Arm::moveIncr_ms(float dq1, float dq2, float dq3)
     m2 += dq2*q2_2_m2;
     m3 += dq3*q3_2_m3;
     
-    //q2m(q1, q2, q3, m1, m2, m3);
+    //m2q(m1, m2, m3, q1, q2, q3);
 
     writePos(m1, m2, m3);
     return 0;
@@ -166,9 +166,9 @@ int Arm::setOffset()
     float _m1 = posToRad(servos.readPos(M1_ID));
     float _m2 = posToRad(servos.readPos(M2_ID));
     float _m3 = posToRad(servos.readPos(M3_ID));
-    offset1 = _m1*m1_2_q1 - 180.0f;
-    offset2 = _m2*m2_2_q2 - 180.0f;
-    offset3 = _m3*m3_2_q3 - 180.0f;
+    //offset1 = _m1*m1_2_q1 - 180.0f;
+    offset2 = _m2*m2_2_q2 - (27.0f*M_PI/180.0f);
+    offset3 = _m3*m3_2_q3 - (180.0f*M_PI/180.0f);
 
     return 0;
 }

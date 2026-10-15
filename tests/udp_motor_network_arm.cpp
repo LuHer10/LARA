@@ -98,6 +98,7 @@ int main() {
             
         }
 
+        
         if(!manual){
         if(x_right || y_right)
             {
@@ -112,6 +113,7 @@ int main() {
         if(pre_manual != manual && !manual)
         {
             arm.setOffset();
+            arm.home();
             //arm.move_qs(PI/2.0f, PI, PI);
         }
 
@@ -135,7 +137,8 @@ int main() {
         */
 
         printf("%f, %f, %f      ", q1*180.0f/PI, q2*180.0f/PI, q3*180.0f/PI);
-        printf("%f, %f, %f, %d  \n", arm_x, arm_y, arm_th, mode);
+        printf("%f, %f, %f, %d     ", arm_x, arm_y, arm_th, manual);
+        printf("%d, %d, %d  \n", d1, d2, d3);
 
         //printf("%f, %f, %f, %f, %d", x_left, y_left, x_right, y_right, grip);
 

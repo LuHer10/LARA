@@ -143,6 +143,9 @@ void Network::receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r,
             x_r = rx;
             y_r = ry;
             mode = mod;
+            dof_1 = dof1;
+            dof_2 = dof2;
+            dof_3 = dof3;
 
             gettimeofday(&last_receive_time, NULL);
             timeout_printed = 0;

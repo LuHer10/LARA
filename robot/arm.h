@@ -95,7 +95,7 @@ public:
         q2 = M_PI/2.0f;
         q3 = M_PI/2.0f;
 
-        m1 = q1; //posToRad(servos.readPos(10));
+        m1 = M_PI; //posToRad(servos.readPos(10));
         //m1 = posToRad(servos.readPos(20));
         m2 = posToRad(servos.readPos(M2_ID));
         m3 = posToRad(servos.readPos(M3_ID));
