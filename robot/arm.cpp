@@ -163,9 +163,12 @@ int Arm::moveIncr_ms(float dq1, float dq2, float dq3)
 
 int Arm::setOffset()
 {
-    offset1 = m1*m1_2_q1 - 180.0f;
-    offset2 = m2*m2_2_q2 - 180.0f;
-    offset3 = m3*m3_2_q3 - 180.0f;
+    float _m1 = posToRad(servos.readPos(M1_ID));
+    float _m2 = posToRad(servos.readPos(M2_ID));
+    float _m3 = posToRad(servos.readPos(M3_ID));
+    offset1 = _m1*m1_2_q1 - 180.0f;
+    offset2 = _m2*m2_2_q2 - 180.0f;
+    offset3 = _m3*m3_2_q3 - 180.0f;
 
     return 0;
 }

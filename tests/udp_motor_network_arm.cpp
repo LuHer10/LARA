@@ -21,6 +21,8 @@ int main() {
     float q1, q2, q3;
     float arm_x, arm_y, arm_th;
 
+    int8_t d1, d2, d3;
+
     int8_t mode;
     int8_t grip = 0;
 
@@ -55,7 +57,11 @@ int main() {
         pre_x_right = x_right;
         pre_y_right = y_right;
 
-        net.receiveJoysticks(x_left, y_left, x_right, y_right, mode);
+        
+
+        net.receiveJoysticks(x_left, y_left, x_right, y_right,
+                             d1, d2, d3,
+                             mode);
 
         pre_manual = manual;
 
@@ -92,16 +98,21 @@ int main() {
             
         }
 
+        if(!manual){
         if(x_right || y_right)
-        {
-            if(manual == 0)
-                arm.moveIncr(x_right*0.005f, y_right*0.005f, 0.0f);
-            if(manual == 1)
             {
-                arm.move_q1(PI/2.0f);
-                arm.moveIncr_ms(0.0f, x_left, y_right);
-            }
             
+                arm.moveIncr(x_right*0.005f, y_right*0.005f, 0.0f);
+            }
+        }
+        else {
+            arm.moveIncr_ms(0.01f*d1, 0.01f*d2, 0.01f*d3);
+        }
+
+        if(pre_manual != manual && !manual)
+        {
+            arm.setOffset();
+            //arm.move_qs(PI/2.0f, PI, PI);
         }
 
         grip = mode & 0x01;

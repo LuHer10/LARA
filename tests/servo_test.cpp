@@ -18,21 +18,22 @@ int main()
 
 
     //printf("q1: %d, q2: %d, q3: %d\n", pos11, pos40, pos30);
-    //servos.enableTorque(11);
+    servos.enableTorque(11);
     //servos.enableTorque(30);
     //servos.enableTorque(40);
-    servos.enableTorque(50);
+    //servos.enableTorque(50);
 
     //servos.writePos(11, degToPos(90));
     //servos.writePos(40, 3500); //6700
     //servos.writePos(30, -500); //1655 -200
     
     
-    servos.writePos(50, degToPos(90));
+    //servos.writePos(50, degToPos(90));
 
     sleep(2);
 
-    //servos.writePos(50, degToPos(135));
+    float pos = servos.readPos(11);
+    printf("%d", pos);
     
     sleep(2);
 

@@ -10,10 +10,15 @@ class UDPHandler : public QObject
 public:
     explicit UDPHandler(QObject *parent = nullptr);
 
-    Q_INVOKABLE void sendJoystickData(float lx, float ly,
+    /*Q_INVOKABLE void sendJoystickData(float lx, float ly,
                                       float rx, float ry,
                                       int8_t grip);
+    */
 
+    Q_INVOKABLE void sendJoystickData(float lx, float ly,
+                                      float rx, float ry,
+                                      float d1, float d2, float d3,
+                                      int8_t mode);
 
 signals:
     void dataReceived(QString data);
