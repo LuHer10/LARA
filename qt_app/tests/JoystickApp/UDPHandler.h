@@ -17,7 +17,7 @@ public:
 
     Q_INVOKABLE void sendJoystickData(float lx, float ly,
                                       float rx, float ry,
-                                      float d1, float d2, float d3,
+                                      int8_t d1, int8_t d2, int8_t d3,
                                       int8_t mode);
 
 signals:
