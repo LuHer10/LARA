@@ -147,6 +147,8 @@ void Network::receiveJoysticks(float &x_l, float &y_l, float &x_r, float &y_r,
             dof_2 = dof2;
             dof_3 = dof3;
 
+            if(dof3 < -1 || dof3 > 1) dof_3 = 0;
+
             gettimeofday(&last_receive_time, NULL);
             timeout_printed = 0;
             client_known = 1;  // now we know where to send responses
